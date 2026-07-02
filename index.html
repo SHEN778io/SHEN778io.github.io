@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>申兆文 - AI 视频创作者</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:linear-gradient(135deg,#0a0a0a 0%,#1a0a2e 50%,#0a0a0a 100%);text-align:center;padding:40px 20px}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(120,80,255,0.08) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(0,180,255,0.08) 0%,transparent 50%);animation:bgShift 8s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:translate(0,0)}100%{transform:translate(-5%,-5%)}}
+.hero-content{position:relative;z-index:1}
+.hero h1{font-size:clamp(2.5rem,8vw,5rem);font-weight:700;letter-spacing:4px;margin-bottom:8px;background:linear-gradient(135deg,#fff 0%,#a78bfa 50%,#60a5fa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:clamp(1rem,3vw,1.6rem);color:#a0a0a0;font-weight:300;letter-spacing:6px;margin-bottom:24px}
+.hero .tagline{font-size:clamp(0.9rem,2vw,1.15rem);color:#666;max-width:500px;margin:0 auto;line-height:1.8}
+.scroll-down{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:1;animation:bounce 2s infinite;cursor:pointer;width:30px;height:50px;border:2px solid rgba(255,255,255,0.2);border-radius:15px;display:flex;align-items:center;justify-content:center}
+.scroll-down::after{content:'';width:4px;height:10px;background:rgba(255,255,255,0.4);border-radius:2px;animation:scrollDot 2s infinite}
+@keyframes scrollDot{0%,100%{transform:translateY(-6px);opacity:0}50%{transform:translateY(6px);opacity:1}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.section{padding:80px 20px}
+.section-title{text-align:center;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:600;margin-bottom:12px}
+.section-desc{text-align:center;color:#888;font-size:1rem;margin-bottom:50px;max-width:600px;margin-left:auto;margin-right:auto}
+.gallery{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:0 16px}
+.video-card{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;aspect-ratio:16/9;background:#1a1a2e;transition:transform 0.3s ease,box-shadow 0.3s ease;opacity:0;transform:translateY(30px)}
+.video-card.visible{opacity:1;transform:translateY(0)}
+.video-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(120,80,255,0.2)}
+.video-card .cover{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+.video-card .cover .gradient{width:100%;height:100%;position:absolute;top:0;left:0}
+.video-card .cover .play-btn{position:absolute;width:60px;height:60px;background:rgba(255,255,255,0.12);border:2px solid rgba(255,255,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;backdrop-filter:blur(4px)}
+.video-card:hover .play-btn{background:rgba(120,80,255,0.6);border-color:#a78bfa;transform:scale(1.1)}
+.video-card .play-btn::after{content:'';width:0;height:0;border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.video-card .info{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(0,0,0,0.85));z-index:1}
+.video-card .info .num{font-size:0.75rem;color:#a78bfa;font-weight:500;letter-spacing:1px;margin-bottom:4px}
+.video-card .info .title{font-size:0.95rem;font-weight:500;line-height:1.4}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+.modal.active{display:flex}
+.modal-content{position:relative;width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 20px 80px rgba(0,0,0,0.8)}
+.modal-content iframe{width:100%;height:100%;border:none}
+.modal-close{position:absolute;top:-40px;right:0;background:none;border:none;color:rgba(255,255,255,0.6);font-size:14px;cursor:pointer;padding:8px 16px;transition:color 0.2s}
+.modal-close:hover{color:#fff}
+.contact{text-align:center;padding:60px 20px 80px;border-top:1px solid rgba(255,255,255,0.06)}
+.contact h3{font-size:1.2rem;font-weight:500;margin-bottom:8px;color:#888}
+.contact a{color:#a78bfa;text-decoration:none;font-size:1.1rem;transition:color 0.2s}
+.contact a:hover{color:#c4b5fd}
+.contact .hint{color:#555;font-size:0.85rem;margin-top:8px}
+@media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr);gap:16px}}
+@media(max-width:500px){.gallery{grid-template-columns:1fr;gap:14px}}
+</style>
+</head>
+<body>
+
+<section class="hero" id="top">
+  <div class="hero-content">
+    <h1>申兆文</h1>
+    <p class="subtitle">AI 视频创作者</p>
+    <p class="tagline">用 AI 探索视觉叙事的边界 &mdash; 从概念到影像，让想象力生成</p>
+  </div>
+  <div class="scroll-down" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})"></div>
+</section>
+
+<section class="section" id="works">
+  <h2 class="section-title">我的作品</h2>
+  <p class="section-desc">点击卡片查看 AI 生成的视频作品</p>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<div class="contact">
+  <h3>联系我</h3>
+  <a href="tel:17378145776">173 7814 5776</a>
+  <p class="hint">欢迎合作 &amp; 交流</p>
+</div>
+
+<div class="modal" id="videoModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">✕ 关闭</button>
+    <iframe id="player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+const works = [
+  { bv: '', title: '梦境回廊', colors: ['#1a0533','#4a1a7a'] },
+  { bv: '', title: '数字幻境', colors: ['#0a1a3a','#1a5a8a'] },
+  { bv: '', title: '机械纪元', colors: ['#1a1a1a','#4a4a2a'] },
+  { bv: '', title: '星河漫游', colors: ['#0a0a2e','#1a3a6a'] },
+  { bv: '', title: '像素宇宙', colors: ['#2a0a1a','#6a1a3a'] },
+  { bv: '', title: '光影之间', colors: ['#1a1a2e','#3a2a5a'] },
+  { bv: '', title: '未来考古', colors: ['#0a2a1a','#2a5a3a'] },
+  { bv: '', title: '量子花园', colors: ['#1a0a2a','#3a1a6a'] },
+  { bv: '', title: '赛博律动', colors: ['#0a0a1a','#2a1a5a'] },
+  { bv: '', title: '意识流', colors: ['#1a0a1a','#5a2a4a'] },
+  { bv: '', title: '数据尘埃', colors: ['#0a1a1a','#2a4a4a'] },
+  { bv: '', title: '迷雾之城', colors: ['#1a1a0a','#4a3a1a'] },
+  { bv: '', title: '熵增世界', colors: ['#1a0505','#4a1a1a'] },
+  { bv: '', title: '虚拟边界', colors: ['#05051a','#1a1a5a'] },
+  { bv: '', title: '信号丢失', colors: ['#1a0a05','#3a2a10'] },
+  { bv: '', title: '最后帧', colors: ['#0a0505','#2a1a1a'] },
+];
+
+const gallery = document.getElementById('gallery');
+works.forEach((w, i) => {
+  const card = document.createElement('div');
+  card.className = 'video-card';
+  card.setAttribute('data-index', i);
+  card.innerHTML = `
+    <div class="cover">
+      <div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"></div>
+      <div class="play-btn"></div>
+      <div class="info">
+        <div class="num">作品 ${String(i+1).padStart(2,'0')}</div>
+        <div class="title">${w.title}</div>
+      </div>
+    </div>
+  `;
+  card.addEventListener('click', () => openModal(i));
+  gallery.appendChild(card);
+});
+
+function openModal(i) {
+  const w = works[i];
+  if (!w.bv) return alert('视频尚未上传 — 请先在 B站 发布，然后将 BV 号填入 index.html');
+  const iframe = document.getElementById('player');
+  iframe.src = `https://player.bilibili.com/player.html?bvid=${w.bv}&autoplay=1&page=1`;
+  document.getElementById('videoModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('player').src = '';
+  document.getElementById('videoModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('videoModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.video-card').forEach((el, i) => {
+  setTimeout(() => observer.observe(el), i * 80);
+});
+</script>
+</body>
+</html>
