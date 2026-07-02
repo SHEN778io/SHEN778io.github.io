@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>??? - AI ?????</title>
+<title>申兆文 - AI 视频创作者</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -53,50 +53,50 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 <section class="hero" id="top">
   <div class="hero-content">
-    <h1>???</h1>
-    <p class="subtitle">AI ?????</p>
-    <p class="tagline">? AI ????????? &mdash; ??????,??????</p>
+    <h1>申兆文</h1>
+    <p class="subtitle">AI 视频创作者</p>
+    <p class="tagline">用 AI 探索视觉叙事的边界 &mdash; 从概念到影像，让想象力生成</p>
   </div>
   <div class="scroll-down" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})"></div>
 </section>
 
 <section class="section" id="works">
-  <h2 class="section-title">????</h2>
-  <p class="section-desc">?????? AI ???????</p>
+  <h2 class="section-title">我的作品</h2>
+  <p class="section-desc">点击卡片查看 AI 生成的视频作品</p>
   <div class="gallery" id="gallery"></div>
 </section>
 
 <div class="contact">
-  <h3>???</h3>
+  <h3>联系我</h3>
   <a href="tel:17378145776">173 7814 5776</a>
-  <p class="hint">???? &amp; ??</p>
+  <p class="hint">欢迎合作 &amp; 交流</p>
 </div>
 
 <div class="modal" id="videoModal">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeModal()">? ??</button>
+    <button class="modal-close" onclick="closeModal()">✕ 关闭</button>
     <iframe id="player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 </div>
 
 <script>
 const works = [
-  { bv: '', title: '????', colors: ['#1a0533','#4a1a7a'] },
-  { bv: '', title: '????', colors: ['#0a1a3a','#1a5a8a'] },
-  { bv: '', title: '????', colors: ['#1a1a1a','#4a4a2a'] },
-  { bv: '', title: '????', colors: ['#0a0a2e','#1a3a6a'] },
-  { bv: '', title: '????', colors: ['#2a0a1a','#6a1a3a'] },
-  { bv: '', title: '????', colors: ['#1a1a2e','#3a2a5a'] },
-  { bv: '', title: '????', colors: ['#0a2a1a','#2a5a3a'] },
-  { bv: '', title: '????', colors: ['#1a0a2a','#3a1a6a'] },
-  { bv: '', title: '????', colors: ['#0a0a1a','#2a1a5a'] },
-  { bv: '', title: '???', colors: ['#1a0a1a','#5a2a4a'] },
-  { bv: '', title: '????', colors: ['#0a1a1a','#2a4a4a'] },
-  { bv: '', title: '????', colors: ['#1a1a0a','#4a3a1a'] },
-  { bv: '', title: '????', colors: ['#1a0505','#4a1a1a'] },
-  { bv: '', title: '????', colors: ['#05051a','#1a1a5a'] },
-  { bv: '', title: '????', colors: ['#1a0a05','#3a2a10'] },
-  { bv: '', title: '???', colors: ['#0a0505','#2a1a1a'] },
+  { bv: 'BV1PcTn6UE8c', title: '猫砂盆', colors: ['#1a0533','#4a1a7a'] },
+  { bv: '', title: '数字幻境', colors: ['#0a1a3a','#1a5a8a'] },
+  { bv: '', title: '机械纪元', colors: ['#1a1a1a','#4a4a2a'] },
+  { bv: '', title: '星河漫游', colors: ['#0a0a2e','#1a3a6a'] },
+  { bv: '', title: '像素宇宙', colors: ['#2a0a1a','#6a1a3a'] },
+  { bv: '', title: '光影之间', colors: ['#1a1a2e','#3a2a5a'] },
+  { bv: '', title: '未来考古', colors: ['#0a2a1a','#2a5a3a'] },
+  { bv: '', title: '量子花园', colors: ['#1a0a2a','#3a1a6a'] },
+  { bv: '', title: '赛博律动', colors: ['#0a0a1a','#2a1a5a'] },
+  { bv: '', title: '意识流', colors: ['#1a0a1a','#5a2a4a'] },
+  { bv: '', title: '数据尘埃', colors: ['#0a1a1a','#2a4a4a'] },
+  { bv: '', title: '迷雾之城', colors: ['#1a1a0a','#4a3a1a'] },
+  { bv: '', title: '熵增世界', colors: ['#1a0505','#4a1a1a'] },
+  { bv: '', title: '虚拟边界', colors: ['#05051a','#1a1a5a'] },
+  { bv: '', title: '信号丢失', colors: ['#1a0a05','#3a2a10'] },
+  { bv: '', title: '最后帧', colors: ['#0a0505','#2a1a1a'] },
 ];
 
 const gallery = document.getElementById('gallery');
@@ -109,7 +109,7 @@ works.forEach((w, i) => {
       <div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"></div>
       <div class="play-btn"></div>
       <div class="info">
-        <div class="num">?? ${String(i+1).padStart(2,'0')}</div>
+        <div class="num">作品 ${String(i+1).padStart(2,'0')}</div>
         <div class="title">${w.title}</div>
       </div>
     </div>
@@ -120,7 +120,7 @@ works.forEach((w, i) => {
 
 function openModal(i) {
   const w = works[i];
-  if (!w.bv) return alert('?????? - ??? B? ??,??? BV ??? index.html');
+  if (!w.bv) return alert('视频尚未上传 — 请先在 B站 发布，然后将 BV 号填入 index.html');
   const iframe = document.getElementById('player');
   iframe.src = `https://player.bilibili.com/player.html?bvid=${w.bv}&autoplay=1&page=1`;
   document.getElementById('videoModal').classList.add('active');
