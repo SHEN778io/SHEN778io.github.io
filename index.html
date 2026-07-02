@@ -37,7 +37,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
 .modal.active{display:flex}
 .modal-content{position:relative;width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 20px 80px rgba(0,0,0,0.8)}
-.modal-content iframe{width:100%;height:100%;border:none}
+.modal-content video{width:100%;height:100%;object-fit:contain;background:#000}
 .modal-close{position:absolute;top:-40px;right:0;background:none;border:none;color:rgba(255,255,255,0.6);font-size:14px;cursor:pointer;padding:8px 16px;transition:color 0.2s}
 .modal-close:hover{color:#fff}
 .contact{text-align:center;padding:60px 20px 80px;border-top:1px solid rgba(255,255,255,0.06)}
@@ -75,28 +75,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div class="modal" id="videoModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">✕ 关闭</button>
-    <iframe id="player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <video id="player" controls playsinline preload="auto"></video>
   </div>
 </div>
 
 <script>
 const works = [
-  { bv: 'BV1PcTn6UE8c', title: '猫砂盆', colors: ['#1a0533','#4a1a7a'] },
-  { bv: '', title: '数字幻境', colors: ['#0a1a3a','#1a5a8a'] },
-  { bv: '', title: '机械纪元', colors: ['#1a1a1a','#4a4a2a'] },
-  { bv: '', title: '星河漫游', colors: ['#0a0a2e','#1a3a6a'] },
-  { bv: '', title: '像素宇宙', colors: ['#2a0a1a','#6a1a3a'] },
-  { bv: '', title: '光影之间', colors: ['#1a1a2e','#3a2a5a'] },
-  { bv: '', title: '未来考古', colors: ['#0a2a1a','#2a5a3a'] },
-  { bv: '', title: '量子花园', colors: ['#1a0a2a','#3a1a6a'] },
-  { bv: '', title: '赛博律动', colors: ['#0a0a1a','#2a1a5a'] },
-  { bv: '', title: '意识流', colors: ['#1a0a1a','#5a2a4a'] },
-  { bv: '', title: '数据尘埃', colors: ['#0a1a1a','#2a4a4a'] },
-  { bv: '', title: '迷雾之城', colors: ['#1a1a0a','#4a3a1a'] },
-  { bv: '', title: '熵增世界', colors: ['#1a0505','#4a1a1a'] },
-  { bv: '', title: '虚拟边界', colors: ['#05051a','#1a1a5a'] },
-  { bv: '', title: '信号丢失', colors: ['#1a0a05','#3a2a10'] },
-  { bv: '', title: '最后帧', colors: ['#0a0505','#2a1a1a'] },
+  { file: 'videos/01.mp4', title: '猫砂盆', colors: ['#1a0533','#4a1a7a'] },
+  { file: 'videos/02.mp4', title: '数字幻境', colors: ['#0a1a3a','#1a5a8a'] },
+  { file: 'videos/03.mp4', title: '机械纪元', colors: ['#1a1a1a','#4a4a2a'] },
+  { file: 'videos/04.mp4', title: '星河漫游', colors: ['#0a0a2e','#1a3a6a'] },
+  { file: 'videos/05.mp4', title: '像素宇宙', colors: ['#2a0a1a','#6a1a3a'] },
+  { file: 'videos/06.mp4', title: '光影之间', colors: ['#1a1a2e','#3a2a5a'] },
+  { file: 'videos/07.mp4', title: '未来考古', colors: ['#0a2a1a','#2a5a3a'] },
+  { file: 'videos/08.mp4', title: '量子花园', colors: ['#1a0a2a','#3a1a6a'] },
+  { file: 'videos/09.mp4', title: '赛博律动', colors: ['#0a0a1a','#2a1a5a'] },
+  { file: 'videos/10.mp4', title: '意识流', colors: ['#1a0a1a','#5a2a4a'] },
+  { file: 'videos/11.mp4', title: '数据尘埃', colors: ['#0a1a1a','#2a4a4a'] },
+  { file: 'videos/12.mp4', title: '迷雾之城', colors: ['#1a1a0a','#4a3a1a'] },
+  { file: 'videos/13.mp4', title: '熵增世界', colors: ['#1a0505','#4a1a1a'] },
+  { file: 'videos/14.mp4', title: '虚拟边界', colors: ['#05051a','#1a1a5a'] },
+  { file: 'videos/15.mp4', title: '信号丢失', colors: ['#1a0a05','#3a2a10'] },
+  { file: 'videos/16.mp4', title: '最后帧', colors: ['#0a0505','#2a1a1a'] },
 ];
 
 const gallery = document.getElementById('gallery');
@@ -120,15 +120,18 @@ works.forEach((w, i) => {
 
 function openModal(i) {
   const w = works[i];
-  if (!w.bv) return alert('视频尚未上传 — 请先在 B站 发布，然后将 BV 号填入 index.html');
-  const iframe = document.getElementById('player');
-  iframe.src = `https://player.bilibili.com/player.html?bvid=${w.bv}&autoplay=1&page=1`;
+  const video = document.getElementById('player');
+  video.src = w.file;
+  video.load();
+  video.play();
   document.getElementById('videoModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
-  document.getElementById('player').src = '';
+  const video = document.getElementById('player');
+  video.pause();
+  video.src = '';
   document.getElementById('videoModal').classList.remove('active');
   document.body.style.overflow = '';
 }
