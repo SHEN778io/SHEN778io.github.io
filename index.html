@@ -51,6 +51,12 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
 .modal-content video,.modal-content iframe{width:100%;height:100%;object-fit:contain;background:#000;border:none}
 .modal-close{position:absolute;top:-44px;right:0;background:none;border:2px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);font-size:13px;cursor:pointer;padding:6px 16px;font-family:'VT323',monospace;letter-spacing:2px;transition:all 0.2s}
 .modal-close:hover{color:var(--yellow);border-color:var(--yellow)}
+.hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;animation:kenBurns 20s ease-in-out infinite alternate}
+@keyframes kenBurns{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.12) translate(-2%,-1%)}}
+.hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;background:linear-gradient(135deg,rgba(0,0,0,0.6) 0%,rgba(10,10,10,0.4) 50%,rgba(0,0,0,0.7) 100%);animation:overlayShift 8s ease-in-out infinite alternate}
+@keyframes overlayShift{0%{opacity:0.8}100%{opacity:1}}
+.hero-content{z-index:2;position:relative;pointer-events:none}
+.hero-content>*{pointer-events:auto}
 @media(max-width:900px){.video-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
 @media(max-width:500px){.video-grid{grid-template-columns:1fr;gap:12px}}
 </style>
@@ -60,11 +66,11 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
 <div class="noise-overlay"></div>
 
 <!-- ===== HERO ===== -->
-<section class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
-  <div class="grid-bg"></div>
-  <div class="relative z-10 text-center flex flex-col items-center justify-center pointer-events-none">
-    <div class="absolute w-[400px] h-[400px] bg-gradient-to-tr from-yellow-500/10 to-yellow-300/5 rounded-full blur-3xl mix-blend-screen"></div>
-    <h1 class="font-black text-6xl md:text-8xl lg:text-[10rem] leading-none tracking-tighter cursor-pointer pointer-events-auto elastic-in glow-hover uppercase" style="animation-delay:0.2s">
+<section id="hero" class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+  <img src="hero-bg.png" alt="" class="hero-bg" id="heroImg">
+  <div class="hero-overlay"></div>
+  <div class="hero-content text-center flex flex-col items-center justify-center">
+    <h1 class="font-black text-6xl md:text-8xl lg:text-[10rem] leading-none tracking-tighter cursor-pointer elastic-in glow-hover uppercase" style="animation-delay:0.2s">
       AI VIDEO<br><span class="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500" style="-webkit-text-stroke:2px #fff">PORTFOLIO</span>
     </h1>
     <h2 class="mt-4 md:mt-8 text-xl md:text-2xl font-bold tracking-[0.3em] md:tracking-[0.5em] text-y2k-yellow elastic-in" style="animation-delay:0.5s">
@@ -74,7 +80,7 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
       申兆文
     </p>
   </div>
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce">
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce" style="z-index:2">
     <span class="text-xs tracking-widest mb-2 font-pixel text-gray-400">SCROLL</span>
     <div class="w-px h-12 bg-gradient-to-b from-y2k-yellow to-transparent"></div>
   </div>
@@ -231,6 +237,20 @@ function closeModal(){
 
 document.getElementById('videoModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// Hero image mouse parallax
+const heroImg=document.getElementById('heroImg');
+if(heroImg){
+  document.getElementById('hero').addEventListener('mousemove',e=>{
+    const r=e.currentTarget.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-0.5;
+    const y=(e.clientY-r.top)/r.height-0.5;
+    heroImg.style.transform=`scale(1.12) translate(${-x*20}px,${-y*12}px)`;
+  });
+  document.getElementById('hero').addEventListener('mouseleave',()=>{
+    heroImg.style.transform='';
+  });
+}
 
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
