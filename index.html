@@ -340,8 +340,9 @@ works.forEach((w,i)=>{
       const c=document.createElement('canvas');c.width=vid.videoWidth;c.height=vid.videoHeight;
       c.getContext('2d').drawImage(vid,0,0,c.width,c.height);
       const img=card.querySelector('.thumb-img');
-      img.src=c.toDataURL('image/jpeg',0.8);
+      img.src=c.toDataURL('image/jpeg',0.85);
       img.style.display='block';
+      card.querySelector('.gradient').style.display='none';
       vid.remove();
     });
     vid.load();
