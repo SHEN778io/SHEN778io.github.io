@@ -51,8 +51,8 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
 .modal-content video,.modal-content iframe{width:100%;height:100%;object-fit:contain;background:#000;border:none}
 .modal-close{position:absolute;top:-44px;right:0;background:none;border:2px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);font-size:13px;cursor:pointer;padding:6px 16px;font-family:'VT323',monospace;letter-spacing:2px;transition:all 0.2s}
 .modal-close:hover{color:var(--yellow);border-color:var(--yellow)}
-.hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;animation:kenBurns 20s ease-in-out infinite alternate}
-@keyframes kenBurns{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.12) translate(-2%,-1%)}}
+.hero-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70vw;height:70vh;object-fit:contain;z-index:0;animation:kenBurns 20s ease-in-out infinite alternate}
+@keyframes kenBurns{0%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(1.08)}}
 .hero-overlay{display:none}
 .hero-content{z-index:2;position:relative;pointer-events:none}
 .hero-content>*{pointer-events:auto;text-shadow:0 2px 20px rgba(0,0,0,0.5)}
@@ -277,10 +277,10 @@ if(heroImg){
     const r=e.currentTarget.getBoundingClientRect();
     const x=(e.clientX-r.left)/r.width-0.5;
     const y=(e.clientY-r.top)/r.height-0.5;
-    heroImg.style.transform=`scale(1.12) translate(${-x*20}px,${-y*12}px)`;
+    heroImg.style.transform=`translate(calc(-50% + ${-x*15}px), calc(-50% + ${-y*10}px)) scale(${heroImg.classList.contains('hero-bg')?'1':'1'})`;
   });
   document.getElementById('hero').addEventListener('mouseleave',()=>{
-    heroImg.style.transform='';
+    heroImg.style.transform='translate(-50%,-50%)';
   });
 }
 
