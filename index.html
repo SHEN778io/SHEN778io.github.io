@@ -330,29 +330,13 @@ const works=[
 const gallery=document.getElementById('gallery');
 works.forEach((w,i)=>{
   const card=document.createElement('div');card.className='video-card';
-  card.innerHTML=`<div class="thumb"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"></div><img class="thumb-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0"><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
+  card.innerHTML=`<div class="thumb"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"></div><img class="thumb-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0" alt=""><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
   card.addEventListener('click',()=>openModal(i));gallery.appendChild(card);
-  // Extract first frame from local videos
-  if(w.file){
-    const vid=document.createElement('video');vid.src=w.file;vid.preload='auto';vid.muted=true;vid.playsInline=true;
-    vid.addEventListener('loadeddata',()=>{vid.currentTime=1});
-    vid.addEventListener('seeked',()=>{
-      const c=document.createElement('canvas');c.width=vid.videoWidth;c.height=vid.videoHeight;
-      c.getContext('2d').drawImage(vid,0,0,c.width,c.height);
-      const img=card.querySelector('.thumb-img');
-      img.src=c.toDataURL('image/jpeg',0.85);
-      img.style.display='block';
-      card.querySelector('.gradient').style.display='none';
-      vid.remove();
-    });
-    vid.load();
-  } else if(w.bv){
-    // For Bilibili, use cover API
-    const img=card.querySelector('.thumb-img');
-    img.src=`https://i0.hdslb.com/bfs/archive/${w.bv.replace('BV','')}.jpg`;
-    img.onerror=function(){this.style.display='none'};
-    img.style.display='block';
-  }
+  // 手动缩略图：放入 thumbs/同名.jpg 即可显示
+  const thumbImg=card.querySelector('.thumb-img');
+  thumbImg.onerror=function(){this.style.display='none'};
+  const thumbName=w.file?w.file.replace('videos/','').replace('.mp4','') : 'mosapen';
+  thumbImg.src=`thumbs/${thumbName}.svg`;
 });
 function openModal(i){
   const w=works[i],v=document.getElementById('player'),f=document.getElementById('bplayer');
