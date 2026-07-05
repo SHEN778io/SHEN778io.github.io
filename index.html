@@ -53,10 +53,9 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
 .modal-close:hover{color:var(--yellow);border-color:var(--yellow)}
 .hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;animation:kenBurns 20s ease-in-out infinite alternate}
 @keyframes kenBurns{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.12) translate(-2%,-1%)}}
-.hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;background:linear-gradient(135deg,rgba(0,0,0,0.6) 0%,rgba(10,10,10,0.4) 50%,rgba(0,0,0,0.7) 100%);animation:overlayShift 8s ease-in-out infinite alternate}
-@keyframes overlayShift{0%{opacity:0.8}100%{opacity:1}}
+.hero-overlay{display:none}
 .hero-content{z-index:2;position:relative;pointer-events:none}
-.hero-content>*{pointer-events:auto}
+.hero-content>*{pointer-events:auto;text-shadow:0 2px 20px rgba(0,0,0,0.5)}
 
 /* 滚动进度条 */
 .scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--yellow);z-index:999;width:0%;transition:width 0.1s linear}
