@@ -330,13 +330,8 @@ const works=[
 const gallery=document.getElementById('gallery');
 works.forEach((w,i)=>{
   const card=document.createElement('div');card.className='video-card';
-  card.innerHTML=`<div class="thumb"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"></div><img class="thumb-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0" alt=""><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
+  card.innerHTML=`<div class="thumb"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.4rem;font-weight:900;color:rgba(255,255,255,0.85);letter-spacing:3px;text-shadow:0 2px 8px rgba(0,0,0,0.4)">${w.title}</span></div><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
   card.addEventListener('click',()=>openModal(i));gallery.appendChild(card);
-  // 手动缩略图：放入 thumbs/同名.jpg 即可显示
-  const thumbImg=card.querySelector('.thumb-img');
-  thumbImg.onerror=function(){this.style.display='none'};
-  const thumbName=w.file?w.file.replace('videos/','').replace('.mp4','') : 'mosapen';
-  thumbImg.src=`thumbs/${thumbName}.svg`;
 });
 function openModal(i){
   const w=works[i],v=document.getElementById('player'),f=document.getElementById('bplayer');
