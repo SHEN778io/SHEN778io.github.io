@@ -34,18 +34,22 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
 .highlight-link:hover{background-color:#fff;transform:translateY(-2px);box-shadow:2px 2px 0 var(--yellow)}
 .typing-cursor::after{content:'|';animation:blink 1s step-end infinite;color:var(--yellow)}
 @keyframes blink{50%{opacity:0}}
-.video-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:0 16px}
-.video-card{position:relative;border-radius:0;overflow:hidden;cursor:pointer;aspect-ratio:16/9;background:#1a1a1a;border:2px solid #333;transition:all 0.3s ease;opacity:0;transform:translateY(40px) scale(0.95)}
-.video-card.visible{opacity:1;transform:translateY(0) scale(1)}
-.video-card:hover{transform:translateY(-8px) scale(1.02);border-color:var(--yellow);box-shadow:0 0 30px rgba(250,255,0,0.15)}
-.video-card .cover{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
-.video-card .cover .gradient{width:100%;height:100%;position:absolute;top:0;left:0}
-.video-card .cover .play-btn{position:absolute;width:56px;height:56px;background:rgba(250,255,0,0.15);border:2px solid rgba(250,255,0,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;backdrop-filter:blur(4px)}
-.video-card:hover .play-btn{background:rgba(250,255,0,0.3);border-color:var(--yellow);transform:scale(1.15)}
-.video-card .play-btn::after{content:'';width:0;height:0;border-left:14px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px}
-.video-card .info{position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,0.9));z-index:1}
-.video-card .info .num{font-size:0.7rem;color:var(--yellow);font-weight:500;letter-spacing:2px;margin-bottom:2px;font-family:'VT323',monospace}
-.video-card .info .title{font-size:0.95rem;font-weight:700;line-height:1.3}
+.works-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:32px;padding:0 16px}
+.works-grid .video-card:first-child{grid-column:1/-1}
+.video-card{position:relative;border-radius:0;overflow:hidden;cursor:pointer;background:#111;transition:all 0.3s ease;opacity:0;transform:translateY(40px)}
+.video-card.visible{opacity:1;transform:translateY(0)}
+.video-card:hover{transform:translateY(-4px)}
+.video-card .thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a0a0a}
+.video-card .thumb .gradient{width:100%;height:100%;position:absolute;top:0;left:0;opacity:0.3}
+.video-card .thumb .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s ease}
+.video-card:hover .play-btn{background:rgba(250,255,0,0.15);border-color:rgba(250,255,0,0.5)}
+.video-card .play-btn::after{content:'';width:0;height:0;border-left:12px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+.video-card .meta{padding:16px 0}
+.video-card .meta .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.video-card .meta .card-title{font-size:1rem;font-weight:700;color:#fff;line-height:1.3}
+.video-card .meta .card-tag{font-size:0.65rem;color:#666;font-family:'VT323',monospace;letter-spacing:1px;white-space:nowrap}
+.video-card .meta .card-desc{font-size:0.78rem;color:#888;line-height:1.5;margin-top:4px}
+@media(max-width:600px){.works-grid{grid-template-columns:1fr;gap:24px}}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;background:rgba(0,0,0,0.9);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
 .modal.active{display:flex}
 .modal-content{position:relative;width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border:2px solid var(--yellow);overflow:hidden}
@@ -129,11 +133,13 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
 </section>
 
 <!-- ===== WORKS ===== -->
-<section id="works" class="w-full py-28 px-6 md:px-20 bg-y2k-black border-t border-gray-800">
+<section id="works" class="w-full py-28 px-6 md:px-12 lg:px-20 bg-y2k-black border-t border-gray-800">
   <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-2 text-white border-b-4 border-y2k-yellow pb-4 inline-block">MY WORKS</h2>
-    <p class="text-gray-500 font-pixel tracking-wider mt-4 mb-16 text-sm">点击卡片播放视频</p>
-    <div class="video-grid" id="gallery"></div>
+    <div class="flex justify-between items-end mb-16 border-b border-gray-800 pb-4">
+      <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white">MY WORKS</h2>
+      <span class="text-xs text-gray-500 font-pixel tracking-wider hidden md:block">AI 视频创作 / PRODUCT 影视广告</span>
+    </div>
+    <div class="works-grid" id="gallery"></div>
   </div>
 </section>
 
@@ -308,23 +314,23 @@ aboutObs.observe(document.getElementById('about'));
 
 // --- Video Gallery ---
 const works=[
-  {title:'猫砂盆',bv:'BV1PcTn6UE8c',colors:['#1a0533','#4a1a7a']},
-  {title:'婴儿车',file:'videos/婴儿车.mp4',colors:['#0a1a3a','#1a5a8a']},
-  {title:'威士忌1',file:'videos/威士忌1.mp4',colors:['#1a1a1a','#4a4a2a']},
-  {title:'威士忌2',file:'videos/威士忌2.mp4',colors:['#0a0a2e','#1a3a6a']},
-  {title:'威士忌3',file:'videos/威士忌3.mp4',colors:['#2a0a1a','#6a1a3a']},
-  {title:'杀虫剂',file:'videos/杀虫剂.mp4',colors:['#1a1a2e','#3a2a5a']},
-  {title:'榨汁机',file:'videos/榨汁机.mp4',colors:['#0a2a1a','#2a5a3a']},
-  {title:'纸巾',file:'videos/纸巾.mp4',colors:['#1a0a2a','#3a1a6a']},
-  {title:'维生素',file:'videos/维生素.mp4',colors:['#0a0a1a','#2a1a5a']},
-  {title:'耳机',file:'videos/耳机.mp4',colors:['#1a0a1a','#5a2a4a']},
-  {title:'饮水机',file:'videos/饮水机.mp4',colors:['#0a1a1a','#2a4a4a']},
-  {title:'鼠标',file:'videos/鼠标.mp4',colors:['#1a1a0a','#4a3a1a']},
+  {title:'猫砂盆',tag:'AI 视频创作 / PRODUCT',desc:'智能猫砂盆产品动态视觉，AI 生成沉浸式场景。',bv:'BV1PcTn6UE8c',colors:['#1a0533','#4a1a7a']},
+  {title:'婴儿车',tag:'AI 视频创作 / PRODUCT',desc:'婴儿推车产品展示，生成逼真的户外场景。',file:'videos/婴儿车.mp4',colors:['#0a1a3a','#1a5a8a']},
+  {title:'威士忌1',tag:'AI 视频创作 / PRODUCT',desc:'威士忌产品动态视觉，光影流动的品质感。',file:'videos/威士忌1.mp4',colors:['#1a1a1a','#4a4a2a']},
+  {title:'威士忌2',tag:'AI 视频创作 / PRODUCT',desc:'威士忌产品镜头，微距质感与氛围营造。',file:'videos/威士忌2.mp4',colors:['#0a0a2e','#1a3a6a']},
+  {title:'威士忌3',tag:'AI 视频创作 / PRODUCT',desc:'威士忌品牌视觉，动态特效与产品融合。',file:'videos/威士忌3.mp4',colors:['#2a0a1a','#6a1a3a']},
+  {title:'杀虫剂',tag:'AI 视频创作 / PRODUCT',desc:'杀虫剂产品创意短片，科技感视觉表达。',file:'videos/杀虫剂.mp4',colors:['#1a1a2e','#3a2a5a']},
+  {title:'榨汁机',tag:'AI 视频创作 / PRODUCT',desc:'榨汁机产品展示，清新色彩与动态演绎。',file:'videos/榨汁机.mp4',colors:['#0a2a1a','#2a5a3a']},
+  {title:'纸巾',tag:'AI 视频创作 / PRODUCT',desc:'纸巾产品广告，轻盈质感的视觉呈现。',file:'videos/纸巾.mp4',colors:['#1a0a2a','#3a1a6a']},
+  {title:'维生素',tag:'AI 视频创作 / PRODUCT',desc:'维生素产品创意展示，健康与活力的视觉语言。',file:'videos/维生素.mp4',colors:['#0a0a1a','#2a1a5a']},
+  {title:'耳机',tag:'AI 视频创作 / PRODUCT',desc:'耳机产品动态视觉，声波与科技的融合。',file:'videos/耳机.mp4',colors:['#1a0a1a','#5a2a4a']},
+  {title:'饮水机',tag:'AI 视频创作 / PRODUCT',desc:'饮水机产品展示，水流与纯净的视觉表达。',file:'videos/饮水机.mp4',colors:['#0a1a1a','#2a4a4a']},
+  {title:'鼠标',tag:'AI 视频创作 / PRODUCT',desc:'鼠标产品创意短片，精密工艺的动态呈现。',file:'videos/鼠标.mp4',colors:['#1a1a0a','#4a3a1a']},
 ];
 const gallery=document.getElementById('gallery');
 works.forEach((w,i)=>{
   const card=document.createElement('div');card.className='video-card';
-  card.innerHTML=`<div class="cover"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"></div><div class="play-btn"></div><div class="info"><div class="num">${String(i+1).padStart(2,'0')}</div><div class="title">${w.title}</div></div></div>`;
+  card.innerHTML=`<div class="thumb"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"></div><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
   card.addEventListener('click',()=>openModal(i));gallery.appendChild(card);
 });
 function openModal(i){
