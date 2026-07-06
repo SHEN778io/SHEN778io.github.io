@@ -487,7 +487,6 @@ const works=[
   {title:'威士忌2',tag:'AI 视频创作 / PRODUCT',desc:'威士忌产品镜头，微距质感与氛围营造。',file:'videos/威士忌2.mp4',colors:['#0a0a2e','#1a3a6a']},
   {title:'威士忌3',tag:'AI 视频创作 / PRODUCT',desc:'威士忌品牌视觉，动态特效与产品融合。',file:'videos/威士忌3.mp4',colors:['#2a0a1a','#6a1a3a']},
   {title:'杀虫剂',tag:'AI 视频创作 / PRODUCT',desc:'杀虫剂产品创意短片，科技感视觉表达。',file:'videos/杀虫剂.mp4',colors:['#1a1a2e','#3a2a5a']},
-  {title:'榨汁机',tag:'AI 视频创作 / PRODUCT',desc:'榨汁机产品展示，清新色彩与动态演绎。',file:'videos/榨汁机.mp4',colors:['#0a2a1a','#2a5a3a']},
   {title:'纸巾',tag:'AI 视频创作 / PRODUCT',desc:'纸巾产品广告，轻盈质感的视觉呈现。',file:'videos/纸巾.mp4',colors:['#1a0a2a','#3a1a6a']},
   {title:'维生素',tag:'AI 视频创作 / PRODUCT',desc:'维生素产品创意展示，健康与活力的视觉语言。',file:'videos/维生素.mp4',colors:['#0a0a1a','#2a1a5a']},
   {title:'耳机',tag:'AI 视频创作 / PRODUCT',desc:'耳机产品动态视觉，声波与科技的融合。',file:'videos/耳机.mp4',colors:['#1a0a1a','#5a2a4a']},
@@ -497,13 +496,11 @@ const works=[
 const gallery=document.getElementById('gallery');
 works.forEach((w,i)=>{
   const card=document.createElement('div');card.className='video-card';
-  card.innerHTML=`<div class="thumb"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.4rem;font-weight:900;color:rgba(255,255,255,0.85);letter-spacing:3px;text-shadow:0 2px 8px rgba(0,0,0,0.4)">${w.title}</span></div><img class="thumb-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0" alt="${w.title}" loading="lazy"><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
+  card.innerHTML=`<div class="thumb"><img class="thumb-img" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0" alt="${w.title}" loading="lazy" decoding="async"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]});transition:opacity .4s"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.4rem;font-weight:900;color:rgba(255,255,255,0.85);letter-spacing:3px;text-shadow:0 2px 8px rgba(0,0,0,0.4)">${w.title}</span></div><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
   card.addEventListener('click',()=>openModal(i));gallery.appendChild(card);
-  // 加载封面图
   const thumbImg=card.querySelector('.thumb-img');
   const thumbName=w.file?w.file.replace('videos/','').replace('.mp4','') : 'mosapen';
-  thumbImg.onload=function(){this.style.display='block';card.querySelector('.gradient').style.display='none'};
-  thumbImg.onerror=function(){this.style.display='none'};
+  thumbImg.onload=function(){const g=this.nextElementSibling;if(g)g.style.opacity='0'};
   thumbImg.src=`thumbs/${thumbName}.png`;
 });
 function openModal(i){
