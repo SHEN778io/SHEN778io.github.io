@@ -340,10 +340,15 @@ tailwind.config={theme:{extend:{colors:{y2k:{black:'#0a0a0a',yellow:'#FAFF00',wh
 <div class="modal" id="videoModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">✕ CLOSE</button>
-    <video id="player" controls playsinline webkit-playsinline preload="metadata" style="display:none"></video>
+    <div id="loader" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:#000;flex-direction:column;z-index:10">
+      <div style="width:40px;height:40px;border:3px solid rgba(250,255,0,0.2);border-top-color:#FAFF00;border-radius:50%;animation:spin .8s linear infinite"></div>
+      <span style="margin-top:16px;font-family:VT323;font-size:14px;color:#666;letter-spacing:2px">BUFFERING</span>
+    </div>
+    <video id="player" controls playsinline webkit-playsinline preload="none" style="display:none"></video>
     <iframe id="bplayer" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="display:none"></iframe>
   </div>
 </div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 
 <script defer>
 // --- Mobile detection ---
@@ -498,21 +503,28 @@ works.forEach((w,i)=>{
   const card=document.createElement('div');card.className='video-card';
   card.innerHTML=`<div class="thumb"><img class="thumb-img" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0" alt="${w.title}" loading="lazy" decoding="async"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]});transition:opacity .4s"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.4rem;font-weight:900;color:rgba(255,255,255,0.85);letter-spacing:3px;text-shadow:0 2px 8px rgba(0,0,0,0.4)">${w.title}</span></div><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
   card.addEventListener('click',()=>openModal(i));gallery.appendChild(card);
+  card.addEventListener('mouseenter',()=>{const p=new Image;p.src=`thumbs/${w.file?w.file.replace('videos/','').replace('.mp4',''):'mosapen'}.png`});
+  card.addEventListener('touchstart',()=>{const p=new Image;p.src=`thumbs/${w.file?w.file.replace('videos/','').replace('.mp4',''):'mosapen'}.png`},{passive:true});
   const thumbImg=card.querySelector('.thumb-img');
   const thumbName=w.file?w.file.replace('videos/','').replace('.mp4','') : 'mosapen';
   thumbImg.onload=function(){const g=this.nextElementSibling;if(g)g.style.opacity='0'};
   thumbImg.src=`thumbs/${thumbName}.png`;
 });
 function openModal(i){
-  const w=works[i],v=document.getElementById('player'),f=document.getElementById('bplayer');
-  v.style.display='none';f.style.display='none';
+  const w=works[i],v=document.getElementById('player'),f=document.getElementById('bplayer'),ld=document.getElementById('loader');
+  v.style.display='none';f.style.display='none';ld.style.display='none';
   if(w.bv){f.src=`https://player.bilibili.com/player.html?bvid=${w.bv}&autoplay=1&page=1`;f.style.display='block'}
-  else{v.src=w.file;v.load();v.play();v.style.display='block'}
+  else{
+    ld.style.display='flex';v.style.display='block';
+    v.src=w.file;v.load();
+    const onReady=function(){ld.style.display='none';v.play()};
+    if(v.readyState>=3){onReady()}else{v.addEventListener('canplay',onReady,{once:true})}
+  }
   document.getElementById('videoModal').classList.add('active');document.body.style.overflow='hidden';
 }
 function closeModal(){
   const v=document.getElementById('player'),f=document.getElementById('bplayer');
-  v.pause();v.src='';f.src='';document.getElementById('videoModal').classList.remove('active');document.body.style.overflow='';
+  v.pause();v.removeAttribute('src');v.load();f.src='';document.getElementById('videoModal').classList.remove('active');document.body.style.overflow='';
 }
 document.getElementById('videoModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
