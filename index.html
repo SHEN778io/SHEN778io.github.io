@@ -344,7 +344,13 @@ tailwind.config={theme:{extend:{colors:{y2k:{black:'#0a0a0a',yellow:'#FAFF00',wh
       <div style="width:40px;height:40px;border:3px solid rgba(250,255,0,0.2);border-top-color:#FAFF00;border-radius:50%;animation:spin .8s linear infinite"></div>
       <span style="margin-top:16px;font-family:VT323;font-size:14px;color:#666;letter-spacing:2px">BUFFERING</span>
     </div>
-    <video id="player" controls playsinline webkit-playsinline preload="none" style="display:none"></video>
+    <div id="playerr" style="display:none;width:100%;height:100%;background:#000">
+      <video id="player" controls playsinline webkit-playsinline x5-playsinline preload="none" style="width:100%;height:100%"></video>
+    </div>
+    <div id="verror" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:#000;flex-direction:column;z-index:10">
+      <span style="font-family:VT323;font-size:18px;color:#FAFF00;letter-spacing:2px">PLAYBACK ERROR</span>
+      <span style="margin-top:12px;font-family:VT323;font-size:12px;color:#666;letter-spacing:1px">点击关闭重试</span>
+    </div>
     <iframe id="bplayer" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="display:none"></iframe>
   </div>
 </div>
@@ -511,20 +517,35 @@ works.forEach((w,i)=>{
   thumbImg.src=`thumbs/${thumbName}.png`;
 });
 function openModal(i){
-  const w=works[i],v=document.getElementById('player'),f=document.getElementById('bplayer'),ld=document.getElementById('loader');
-  v.style.display='none';f.style.display='none';ld.style.display='none';
-  if(w.bv){f.src=`https://player.bilibili.com/player.html?bvid=${w.bv}&autoplay=1&page=1`;f.style.display='block'}
-  else{
-    ld.style.display='flex';v.style.display='block';
+  const w=works[i],v=document.getElementById('player'),f=document.getElementById('bplayer');
+  const ld=document.getElementById('loader'),er=document.getElementById('verror'),pr=document.getElementById('playerr');
+  pr.style.display='none';f.style.display='none';ld.style.display='none';er.style.display='none';
+  if(w.bv){
+    f.src=`https://player.bilibili.com/player.html?bvid=${w.bv}&autoplay=1&page=1`;f.style.display='block'
+  }else{
+    ld.style.display='flex';pr.style.display='block';
     v.src=w.file;v.load();
-    const onReady=function(){ld.style.display='none';v.play()};
-    if(v.readyState>=3){onReady()}else{v.addEventListener('canplay',onReady,{once:true})}
+    let retries=0;
+    function tryPlay(){
+      if(v.readyState>=3){
+        ld.style.display='none';v.play().catch(function(){v.muted=true;v.play()});
+      }else if(v.readyState>=2){
+        ld.style.display='none';v.play().catch(function(){v.muted=true;v.play()});
+      }else{v.addEventListener('canplay',function(){ld.style.display='none';v.play().catch(function(){v.muted=true;v.play()})},{once:true})}
+    }
+    v.onerror=function(){
+      if(retries<2){retries++;setTimeout(function(){v.src=w.file+'?r='+retries;v.load();tryPlay()},1000)}
+      else{ld.style.display='none';er.style.display='flex'}
+    };
+    tryPlay();
   }
   document.getElementById('videoModal').classList.add('active');document.body.style.overflow='hidden';
 }
 function closeModal(){
   const v=document.getElementById('player'),f=document.getElementById('bplayer');
-  v.pause();v.removeAttribute('src');v.load();f.src='';document.getElementById('videoModal').classList.remove('active');document.body.style.overflow='';
+  v.pause();v.removeAttribute('src');v.load();f.src='';
+  v.onerror=null;
+  document.getElementById('videoModal').classList.remove('active');document.body.style.overflow='';
 }
 document.getElementById('videoModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
