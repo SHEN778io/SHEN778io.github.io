@@ -2,29 +2,57 @@
 <html lang="zh-CN" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
 <title>申兆文 | AI 视频创作者</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=Permanent+Marker&family=VT323&display=swap" rel="stylesheet">
-<script>
-tailwind.config={theme:{extend:{colors:{y2k:{black:'#0a0a0a',yellow:'#FAFF00',white:'#FFFFFF',gray:'#222222'}},fontFamily:{sans:['Space Grotesk','sans-serif'],hand:['Permanent Marker','cursive'],pixel:['VT323','monospace']}}}}
-</script>
 <style>
+*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid}
 :root{--yellow:#FAFF00}
-body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
+html{scroll-behavior:smooth;font-family:'Space Grotesk','Segoe UI',sans-serif;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#0a0a0a;color:#fff;overflow-x:hidden;font-family:'Space Grotesk','Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+.font-hand{font-family:'Permanent Marker','Comic Sans MS',cursive}
+.font-pixel{font-family:'VT323','Courier New',monospace}
+.font-black{font-weight:900}
+.font-bold{font-weight:700}
+.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.selection\\:bg-y2k-yellow ::selection,.selection\\:bg-y2k-yellow::selection{background:#FAFF00;color:#000}
+.text-y2k-yellow{color:#FAFF00}
+.text-white{color:#fff}
+.text-gray-400{color:#9ca3af}
+.text-gray-500{color:#6b7280}
+.bg-y2k-black{background:#0a0a0a}
+.border-gray-700{border-color:#374151}
+.border-gray-800{border-color:#1f2937}
+.border-white{border-color:#fff}
+.border-t{border-top-width:1px}
+.border-y{border-top-width:1px;border-bottom-width:1px}
+.border-b{border-bottom-width:1px}
+.border-b-4{border-bottom-width:4px}
+.pointer-events-none{pointer-events:none}
+.pointer-events-auto{pointer-events:auto}
+.uppercase{text-transform:uppercase}
+.tracking-tighter{letter-spacing:-0.05em}
+.tracking-wider{letter-spacing:0.05em}
+.tracking-widest{letter-spacing:0.1em}
+.leading-none{line-height:1}
+.leading-relaxed{line-height:1.625}
+.text-center{text-align:center}
 .noise-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:50;opacity:0.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")}
-.grid-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-size:50px 50px;background-image:linear-gradient(to right,rgba(250,255,0,0.1) 1px,transparent 1px),linear-gradient(to bottom,rgba(250,255,0,0.1) 1px,transparent 1px);animation:moveGrid 20s linear infinite;z-index:0;mask-image:linear-gradient(to bottom,black 40%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,black 40%,transparent 100%)}
+.grid-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-size:50px 50px;background-image:linear-gradient(to right,rgba(250,255,0,0.1) 1px,transparent 1px),linear-gradient(to bottom,rgba(250,255,0,0.1) 1px,transparent 1px);animation:moveGrid 20s linear infinite;z:0;mask-image:linear-gradient(to bottom,black 40%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,black 40%,transparent 100%);will-change:transform}
 @keyframes moveGrid{0%{transform:translateY(0) rotate(0deg) scale(1.2)}100%{transform:translateY(50px) rotate(0deg) scale(1.2)}}
 .elastic-in{animation:elastic 1.2s cubic-bezier(0.175,0.885,0.32,1.275) forwards;opacity:0;transform:translateY(50px) scale(0.8)}
 @keyframes elastic{to{opacity:1;transform:translateY(0) scale(1)}}
-.glow-hover:hover{transform:scale(0.98);text-shadow:0 0 10px var(--yellow),0 0 20px var(--yellow);color:var(--yellow);transition:all 0.3s ease}
-.glow-hover{transition:all 0.3s ease}
-.float-anim{animation:floating 6s ease-in-out infinite}
-@keyframes floating{0%{transform:translateY(0px) rotate(-2deg)}50%{transform:translateY(-15px) rotate(1deg)}100%{transform:translateY(0px) rotate(-2deg)}}
-.sticker{transition:transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94)}
+.glow-hover{transition:all 0.3s ease;cursor:pointer}
+.glow-hover:hover{transform:scale(0.98);text-shadow:0 0 10px var(--yellow),0 0 20px var(--yellow);color:var(--yellow)}
+.float-anim{animation:floating 6s ease-in-out infinite;will-change:transform}
+@keyframes floating{0%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-15px) rotate(1deg)}100%{transform:translateY(0) rotate(-2deg)}}
+.sticker{transition:transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94);will-change:transform}
 .polaroid-container:hover .sticker{animation:wiggle 0.5s ease-in-out infinite alternate}
 .polaroid-container:hover .sticker:nth-child(even){animation-direction:alternate-reverse;animation-duration:0.6s}
 @keyframes wiggle{0%{transform:rotate(-5deg) scale(1.05)}100%{transform:rotate(5deg) scale(0.95)}}
@@ -36,13 +64,12 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
 @keyframes blink{50%{opacity:0}}
 .works-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:32px;padding:0 16px}
 .works-grid .video-card:first-child{grid-column:1/-1}
-.video-card{position:relative;border-radius:0;overflow:hidden;cursor:pointer;background:#111;transition:all 0.3s ease;opacity:0;transform:translateY(40px)}
+.video-card{position:relative;border-radius:0;overflow:hidden;cursor:pointer;background:#111;opacity:0;transform:translateY(40px)}
 .video-card.visible{opacity:1;transform:translateY(0)}
-.video-card:hover{transform:translateY(-4px)}
 .video-card .thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a0a0a}
 .video-card .thumb .gradient{width:100%;height:100%;position:absolute;top:0;left:0;opacity:0.3}
-.video-card .thumb .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s ease}
-.video-card:hover .play-btn{background:rgba(250,255,0,0.15);border-color:rgba(250,255,0,0.5)}
+.video-card .thumb .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
+.video-card:hover .play-btn,.video-card:active .play-btn{background:rgba(250,255,0,0.15);border-color:rgba(250,255,0,0.5)}
 .video-card .play-btn::after{content:'';width:0;height:0;border-left:12px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
 .video-card .meta{padding:16px 0}
 .video-card .meta .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
@@ -50,7 +77,7 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
 .video-card .meta .card-tag{font-size:0.65rem;color:#666;font-family:'VT323',monospace;letter-spacing:1px;white-space:nowrap}
 .video-card .meta .card-desc{font-size:0.78rem;color:#888;line-height:1.5;margin-top:4px}
 @media(max-width:600px){.works-grid{grid-template-columns:1fr;gap:24px}}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;background:rgba(0,0,0,0.9);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;background:rgba(0,0,0,0.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
 .modal.active{display:flex}
 .modal-content{position:relative;width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border:2px solid var(--yellow);overflow:hidden}
 .modal-content video,.modal-content iframe{width:100%;height:100%;object-fit:contain;background:#000;border:none}
@@ -58,7 +85,109 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
 .modal-close:hover{color:var(--yellow);border-color:var(--yellow)}
 @media(max-width:900px){.video-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
 @media(max-width:500px){.video-grid{grid-template-columns:1fr;gap:12px}}
+.mx-auto{margin-left:auto;margin-right:auto}
+.relative{position:relative}
+.absolute{position:absolute}
+.fixed{position:fixed}
+.inset-0{top:0;right:0;bottom:0;left:0}
+.z-0{z-index:0}
+.z-10{z-index:10}
+.flex{display:flex}
+.grid{display:grid}
+.hidden{display:none}
+.h-screen{height:100vh}
+.w-full{width:100%}
+.max-w-7xl{max-width:80rem}
+.max-w-lg{max-width:32rem}
+.max-w-4xl{max-width:56rem}
+.flex-col{flex-direction:column}
+.flex-row{flex-direction:row}
+.items-center{align-items:center}
+.items-end{align-items:flex-end}
+.justify-center{justify-content:center}
+.justify-between{justify-content:space-between}
+.gap-2{gap:0.5rem}
+.gap-16{gap:4rem}
+.gap-8{gap:2rem}
+.overflow-hidden{overflow:hidden}
+.px-6{padding-left:1.5rem;padding-right:1.5rem}
+.py-20{padding-top:5rem;padding-bottom:5rem}
+.py-24{padding-top:6rem;padding-bottom:6rem}
+.py-28{padding-top:7rem;padding-bottom:7rem}
+.mb-4{margin-bottom:1rem}
+.mb-6{margin-bottom:1.5rem}
+.mb-12{margin-bottom:3rem}
+.mb-16{margin-bottom:4rem}
+.mt-4{margin-top:1rem}
+.mt-6{margin-top:1.5rem}
+.mt-8{margin-top:2rem}
+.pb-4{padding-bottom:1rem}
+.pb-10{padding-bottom:2.5rem}
+.inline-block{display:inline-block}
+.space-y-3>li+li{margin-top:0.75rem}
+.text-3xl{font-size:1.875rem}
+.text-6xl{font-size:3.75rem}
+.text-xs{font-size:0.75rem}
+.text-sm{font-size:0.875rem}
+.text-lg{font-size:1.125rem}
+.text-xl{font-size:1.25rem}
+.w-12{width:3rem}
+.h-12{height:3rem}
+.w-2{width:0.5rem}
+.h-2{height:0.5rem}
+.rounded-full{border-radius:9999px}
+.transition-all{transition-property:all}
+.transition-colors{transition-property:color,background-color,border-color}
+.duration-300{transition-duration:300ms}
+.group:hover .group-hover\\:text-y2k-yellow{color:#FAFF00}
+.group:hover .group-hover\\:scale-110{transform:scale(1.1)}
+.hover\\:text-white:hover{color:#fff}
+.hover\\:transition-colors:hover{transition-property:color,background-color,border-color}
+.opacity-60{opacity:0.6}
+.animate-pulse{animation:pulse 2s cubic-bezier(0.4,0,0.6,1) infinite}@keyframes pulse{50%{opacity:0.5}}
+.animate-bounce{animation:bounce 1s infinite}@keyframes bounce{0%,100%{transform:translateY(-25%)}50%{transform:translateY(0)}}
+.transform{transform:var(--tw-transform)}
+.-rotate-2{transform:rotate(-2deg)}
+.-translate-x-1\\/2{transform:translateX(-50%)}
+.cursor-pointer{cursor:pointer}
+.min-h-screen{min-height:100vh}
+.p-6{padding:1.5rem}
+.border-2{border-width:2px}
+.border-4{border-width:4px}
+.border-black{border-color:#000}
+.shadow-2xl{box-shadow:0 25px 50px -12px rgba(0,0,0,0.25)}
+.video-card:hover{transform:translateY(-4px)}
+.video-card:hover .play-btn{background:rgba(250,255,0,0.15);border-color:rgba(250,255,0,0.5)}
+@media(min-width:768px){
+.md\\:grid-cols-2{grid-template-columns:repeat(2,1fr)}
+.md\\:grid-cols-3{grid-template-columns:repeat(3,1fr)}
+.md\\:block{display:block}
+.md\\:flex-row{flex-direction:row}
+.md\\:gap-8{gap:2rem}
+.md\\:gap-20{gap:5rem}
+.md\\:px-12{padding-left:3rem;padding-right:3rem}
+.md\\:px-20{padding-left:5rem;padding-right:5rem}
+.md\\:mt-8{margin-top:2rem}
+.md\\:text-2xl{font-size:1.5rem}
+.md\\:text-5xl{font-size:3rem}
+.md\\:text-8xl{font-size:6rem}
+.md\\:text-base{font-size:1rem}
+.md\\:w-16{width:4rem}
+.md\\:h-16{height:4rem}
+.md\\:w-80{width:20rem}
+.md\\:border-r{border-right-width:1px}
+.md\\:border-b-0{border-bottom-width:0}
+.md\\:p-8{padding:2rem}
+}
+@media(min-width:1024px){
+.lg\\:px-20{padding-left:5rem;padding-right:5rem}
+.lg\\:text-\\[10rem\\]{font-size:10rem}
+}
 </style>
+<script>
+tailwind.config={theme:{extend:{colors:{y2k:{black:'#0a0a0a',yellow:'#FAFF00',white:'#FFFFFF',gray:'#222222'}},fontFamily:{sans:['Space Grotesk','sans-serif'],hand:['Permanent Marker','cursive'],pixel:['VT323','monospace']}}}}
+</script>
+<script src="https://cdn.tailwindcss.com" defer></script>
 </head>
 <body class="antialiased font-sans selection:bg-y2k-yellow selection:text-black">
 
@@ -211,73 +340,111 @@ body{background-color:#0a0a0a;color:#fff;overflow-x:hidden}
 <div class="modal" id="videoModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">✕ CLOSE</button>
-    <video id="player" controls playsinline preload="auto" style="display:none"></video>
-    <iframe id="bplayer" allow="autoplay; encrypted-media" allowfullscreen style="display:none"></iframe>
+    <video id="player" controls playsinline webkit-playsinline preload="metadata" style="display:none"></video>
+    <iframe id="bplayer" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="display:none"></iframe>
   </div>
 </div>
 
-<script>
-// --- Three.js Hero Scene ---
+<script defer>
+// --- Mobile detection ---
+const isMobile=('ontouchstart' in window)||(navigator.maxTouchPoints>0)||(window.innerWidth<768);
+const isLowPerf=isMobile||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<4);
+
+// --- Dynamic Three.js loader ---
+function loadThreeJS(){
+  const s=document.createElement('script');
+  s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  s.onload=initHero3D;
+  s.onerror=function(){document.getElementById('hero-3d-container').innerHTML='<div style="color:#FAFF00;font-family:VT323;font-size:1rem;text-align:center;padding-top:30vh">3D SCENE<br><span style="color:#666">loading failed</span></div>'};
+  document.body.appendChild(s);
+}
+
+// --- Three.js Hero Scene (mobile-optimized) ---
 function initHero3D(){
   const container=document.getElementById('hero-3d-container');
   if(!container)return;
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,100);
-  camera.position.z=18;
-  const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
-  renderer.setSize(window.innerWidth,window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  container.appendChild(renderer.domElement);
-  const cluster=new THREE.Group();
-  scene.add(cluster);
-  const matYellow=new THREE.MeshPhysicalMaterial({color:0xFAFF00,metalness:0.3,roughness:0.2,clearcoat:0.8});
-  const matDark=new THREE.MeshStandardMaterial({color:0x111111,roughness:0.9});
-  const matChrome=new THREE.MeshPhysicalMaterial({color:0xffffff,metalness:1,roughness:0.1});
-  const matWhite=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.4});
-  const matWireframe=new THREE.MeshBasicMaterial({color:0xFAFF00,wireframe:true});
-  const rockGeo=new THREE.DodecahedronGeometry(2.5,1);
-  const posAttr=rockGeo.attributes.position;
-  for(let i=0;i<posAttr.count;i++){posAttr.setXYZ(i,posAttr.getX(i)+(Math.random()-0.5)*0.4,posAttr.getY(i)+(Math.random()-0.5)*0.4,posAttr.getZ(i)+(Math.random()-0.5)*0.4)}
-  rockGeo.computeVertexNormals();
-  const rock=new THREE.Mesh(rockGeo,matDark);rock.position.set(-3,-2,1);cluster.add(rock);
-  const crossGroup=new THREE.Group();
-  crossGroup.add(new THREE.Mesh(new THREE.BoxGeometry(1,4,1),matYellow));
-  crossGroup.add(new THREE.Mesh(new THREE.BoxGeometry(4,1,1),matYellow));
-  crossGroup.position.set(2,3,-1);crossGroup.rotation.z=Math.PI/4;crossGroup.rotation.x=Math.PI/6;cluster.add(crossGroup);
-  const torus=new THREE.Mesh(new THREE.TorusGeometry(2,0.6,32,64),matChrome);
-  torus.position.set(-3,3,-2);torus.rotation.x=Math.PI/3;cluster.add(torus);
-  const sphere=new THREE.Mesh(new THREE.SphereGeometry(1.8,32,16),matWhite);
-  sphere.position.set(4,-1.5,0);cluster.add(sphere);
-  const wireSphere=new THREE.Mesh(new THREE.IcosahedronGeometry(1.5,0),matWireframe);
-  wireSphere.position.set(0,0,3.5);cluster.add(wireSphere);
-  const ring1=new THREE.Mesh(new THREE.TorusGeometry(6.5,0.04,16,100),matWhite);
-  ring1.rotation.x=Math.PI/2.5;ring1.rotation.y=Math.PI/6;cluster.add(ring1);
-  const ring2=new THREE.Mesh(new THREE.TorusGeometry(7.5,0.02,16,100),new THREE.MeshBasicMaterial({color:0xFAFF00}));
-  ring2.rotation.x=-Math.PI/3;ring2.rotation.y=-Math.PI/4;cluster.add(ring2);
-  for(let i=0;i<20;i++){
-    const p=new THREE.Mesh(new THREE.SphereGeometry(0.2,16,16),Math.random()>0.6?matYellow:matChrome);
-    p.position.set((Math.random()-0.5)*15,(Math.random()-0.5)*15,(Math.random()-0.5)*10);cluster.add(p);
-  }
-  scene.add(new THREE.AmbientLight(0xffffff,0.8));
-  const dl1=new THREE.DirectionalLight(0xffffff,2);dl1.position.set(10,10,10);scene.add(dl1);
-  const dl2=new THREE.DirectionalLight(0xFAFF00,1);dl2.position.set(-10,-10,-5);scene.add(dl2);
-  let mouseX=0,mouseY=0;const target=new THREE.Vector2();
-  document.addEventListener('mousemove',e=>{mouseX=(e.clientX-window.innerWidth/2)*0.0005;mouseY=(e.clientY-window.innerHeight/2)*0.0005});
-  function animate(){
-    requestAnimationFrame(animate);
-    cluster.rotation.y+=0.001;cluster.rotation.x+=0.0005;
-    target.x=mouseX;target.y=mouseY;
-    cluster.rotation.y+=0.05*(target.x-cluster.rotation.y);
-    cluster.rotation.x+=0.05*(target.y-cluster.rotation.x);
-    rock.rotation.y-=0.002;rock.rotation.z+=0.001;crossGroup.rotation.z+=0.003;
-    wireSphere.rotation.x+=0.005;wireSphere.rotation.y+=0.008;torus.rotation.z+=0.002;
-    ring1.rotation.z-=0.001;ring2.rotation.z+=0.002;
-    renderer.render(scene,camera);
-  }
-  animate();
-  window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});
+  const detail=isLowPerf?1:2;
+  const ringSeg=isLowPerf?24:64;
+  const sphereSeg=isLowPerf?16:32;
+  const particleCount=isLowPerf?8:20;
+  const pixelRatio=Math.min(window.devicePixelRatio,isMobile?1.5:2);
+
+  try{
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,100);
+    camera.position.z=18;
+    const renderer=new THREE.WebGLRenderer({alpha:true,antialias:!isLowPerf});
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    renderer.setPixelRatio(pixelRatio);
+    container.appendChild(renderer.domElement);
+    const cluster=new THREE.Group();
+    scene.add(cluster);
+    const matYellow=new THREE.MeshPhysicalMaterial({color:0xFAFF00,metalness:0.3,roughness:0.2,clearcoat:isLowPerf?0:0.8});
+    const matDark=new THREE.MeshStandardMaterial({color:0x111111,roughness:0.9});
+    const matChrome=new THREE.MeshPhysicalMaterial({color:0xffffff,metalness:1,roughness:0.1});
+    const matWhite=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.4});
+    const matWireframe=new THREE.MeshBasicMaterial({color:0xFAFF00,wireframe:true});
+    const rockGeo=new THREE.DodecahedronGeometry(2.5,isLowPerf?0:1);
+    const posAttr=rockGeo.attributes.position;
+    for(let i=0;i<posAttr.count;i++){posAttr.setXYZ(i,posAttr.getX(i)+(Math.random()-0.5)*0.4,posAttr.getY(i)+(Math.random()-0.5)*0.4,posAttr.getZ(i)+(Math.random()-0.5)*0.4)}
+    rockGeo.computeVertexNormals();
+    const rock=new THREE.Mesh(rockGeo,matDark);rock.position.set(-3,-2,1);cluster.add(rock);
+    const crossGroup=new THREE.Group();
+    crossGroup.add(new THREE.Mesh(new THREE.BoxGeometry(1,4,1),matYellow));
+    crossGroup.add(new THREE.Mesh(new THREE.BoxGeometry(4,1,1),matYellow));
+    crossGroup.position.set(2,3,-1);crossGroup.rotation.z=Math.PI/4;crossGroup.rotation.x=Math.PI/6;cluster.add(crossGroup);
+    const torus=new THREE.Mesh(new THREE.TorusGeometry(2,0.6,16,ringSeg),matChrome);
+    torus.position.set(-3,3,-2);torus.rotation.x=Math.PI/3;cluster.add(torus);
+    const sphere=new THREE.Mesh(new THREE.SphereGeometry(1.8,sphereSeg,Math.floor(sphereSeg/2)),matWhite);
+    sphere.position.set(4,-1.5,0);cluster.add(sphere);
+    const wireSphere=new THREE.Mesh(new THREE.IcosahedronGeometry(1.5,0),matWireframe);
+    wireSphere.position.set(0,0,3.5);cluster.add(wireSphere);
+    const ring1=new THREE.Mesh(new THREE.TorusGeometry(6.5,0.04,12,ringSeg),matWhite);
+    ring1.rotation.x=Math.PI/2.5;ring1.rotation.y=Math.PI/6;cluster.add(ring1);
+    const ring2=new THREE.Mesh(new THREE.TorusGeometry(7.5,0.02,12,ringSeg),new THREE.MeshBasicMaterial({color:0xFAFF00}));
+    ring2.rotation.x=-Math.PI/3;ring2.rotation.y=-Math.PI/4;cluster.add(ring2);
+    for(let i=0;i<particleCount;i++){
+      const p=new THREE.Mesh(new THREE.SphereGeometry(isLowPerf?0.25:0.2,8,8),Math.random()>0.6?matYellow:matChrome);
+      p.position.set((Math.random()-0.5)*15,(Math.random()-0.5)*15,(Math.random()-0.5)*10);cluster.add(p);
+    }
+    scene.add(new THREE.AmbientLight(0xffffff,0.8));
+    const dl1=new THREE.DirectionalLight(0xffffff,isLowPerf?1.5:2);dl1.position.set(10,10,10);scene.add(dl1);
+    const dl2=new THREE.DirectionalLight(0xFAFF00,isLowPerf?0.5:1);dl2.position.set(-10,-10,-5);scene.add(dl2);
+    let mouseX=0,mouseY=0;const target=new THREE.Vector2();
+
+    function onPointer(x,y){
+      mouseX=(x-window.innerWidth/2)*0.0005;
+      mouseY=(y-window.innerHeight/2)*0.0005;
+    }
+    document.addEventListener('mousemove',e=>onPointer(e.clientX,e.clientY));
+    document.addEventListener('touchmove',e=>{const t=e.touches[0];if(t)onPointer(t.clientX,t.clientY)},{passive:true});
+
+    let resizeTimer;
+    window.addEventListener('resize',()=>{
+      clearTimeout(resizeTimer);
+      resizeTimer=setTimeout(()=>{
+        camera.aspect=window.innerWidth/window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth,window.innerHeight);
+      },200);
+    });
+
+    function animate(){
+      requestAnimationFrame(animate);
+      cluster.rotation.y+=0.001;cluster.rotation.x+=0.0005;
+      target.x=mouseX;target.y=mouseY;
+      cluster.rotation.y+=0.05*(target.x-cluster.rotation.y);
+      cluster.rotation.x+=0.05*(target.y-cluster.rotation.x);
+      rock.rotation.y-=0.002;rock.rotation.z+=0.001;crossGroup.rotation.z+=0.003;
+      wireSphere.rotation.x+=0.005;wireSphere.rotation.y+=0.008;torus.rotation.z+=0.002;
+      ring1.rotation.z-=0.001;ring2.rotation.z+=0.002;
+      renderer.render(scene,camera);
+    }
+    animate();
+  }catch(e){container.innerHTML='<div style="color:#666;font-family:VT323;font-size:0.8rem;text-align:center;padding-top:30vh">3D unavailable</div>'}
 }
-window.addEventListener('load',initHero3D);
+// Load Three.js after first paint
+if(document.readyState==='complete'||document.readyState==='interactive'){setTimeout(loadThreeJS,100)}else{document.addEventListener('DOMContentLoaded',()=>setTimeout(loadThreeJS,100))}
 
 // --- Toast ---
 function showToast(msg){
@@ -330,7 +497,7 @@ const works=[
 const gallery=document.getElementById('gallery');
 works.forEach((w,i)=>{
   const card=document.createElement('div');card.className='video-card';
-  card.innerHTML=`<div class="thumb"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.4rem;font-weight:900;color:rgba(255,255,255,0.85);letter-spacing:3px;text-shadow:0 2px 8px rgba(0,0,0,0.4)">${w.title}</span></div><img class="thumb-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0" alt=""><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
+  card.innerHTML=`<div class="thumb"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.4rem;font-weight:900;color:rgba(255,255,255,0.85);letter-spacing:3px;text-shadow:0 2px 8px rgba(0,0,0,0.4)">${w.title}</span></div><img class="thumb-img" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0" alt="${w.title}" loading="lazy"><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
   card.addEventListener('click',()=>openModal(i));gallery.appendChild(card);
   // 加载封面图
   const thumbImg=card.querySelector('.thumb-img');
@@ -355,18 +522,23 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 const vObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');vObs.unobserve(e.target)}})},{threshold:0.1});
 document.querySelectorAll('.video-card').forEach((el,i)=>{setTimeout(()=>vObs.observe(el),i*60)});
 
-// --- Canvas Particles ---
+// --- Canvas Particles (mobile-optimized) ---
 const canvas=document.getElementById('particleCanvas'),ctx=canvas.getContext('2d');
-let particles=[];
+let particles=[],animId=null;
+const pScale=isMobile?20000:10000;
 function resizeCanvas(){canvas.width=canvas.parentElement.clientWidth;canvas.height=canvas.parentElement.clientHeight;initParticles()}
 class Particle{
   constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+0.5;this.baseAlpha=Math.random()*0.5+0.1;this.alpha=this.baseAlpha;this.pulseSpeed=Math.random()*0.02+0.005;this.growing=Math.random()>0.5;this.color=Math.random()>0.8?'#FFFFFF':'#FAFF00'}
   update(){if(this.growing){this.alpha+=this.pulseSpeed;if(this.alpha>=1)this.growing=false}else{this.alpha-=this.pulseSpeed;if(this.alpha<=this.baseAlpha/2)this.growing=true}}
   draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fillStyle=this.color;ctx.globalAlpha=this.alpha;ctx.fill()}
 }
-function initParticles(){particles=[];const n=(canvas.width*canvas.height)/10000;for(let i=0;i<n;i++)particles.push(new Particle())}
-function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});ctx.globalAlpha=1;requestAnimationFrame(animateParticles)}
-window.addEventListener('resize',resizeCanvas);resizeCanvas();animateParticles();
+function initParticles(){particles=[];const n=(canvas.width*canvas.height)/pScale;for(let i=0;i<Math.min(n,60);i++)particles.push(new Particle())}
+function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});ctx.globalAlpha=1;animId=requestAnimationFrame(animateParticles)}
+function stopParticles(){if(animId){cancelAnimationFrame(animId);animId=null}}
+let resizeTimer;
+window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(resizeCanvas,300)});
+resizeCanvas();animateParticles();
+document.addEventListener('visibilitychange',()=>{document.hidden?stopParticles():animateParticles()});
 </script>
 </body>
 </html>
