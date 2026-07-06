@@ -491,6 +491,7 @@ const aboutObs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(ent
 aboutObs.observe(document.getElementById('about'));
 
 // --- Video Gallery ---
+const CDN='https://cdn.jsdelivr.net/gh/SHEN778io/SHEN778io.github.io@latest';
 const works=[
   {title:'猫砂盆',tag:'AI 视频创作 / PRODUCT',desc:'智能猫砂盆产品动态视觉，AI 生成沉浸式场景。',file:'videos/猫砂盆.mp4',bv:'BV1PcTn6UE8c',colors:['#1a0533','#4a1a7a']},
   {title:'婴儿车',tag:'AI 视频创作 / PRODUCT',desc:'婴儿推车产品展示，生成逼真的户外场景。',file:'videos/婴儿车.mp4',colors:['#0a1a3a','#1a5a8a']},
@@ -524,7 +525,7 @@ function openModal(i){
     f.src=`https://player.bilibili.com/player.html?bvid=${w.bv}&autoplay=1&page=1`;f.style.display='block'
   }else{
     ld.style.display='flex';pr.style.display='block';
-    v.src=w.file;v.load();
+    v.src=CDN+'/'+w.file;v.load();
     let retries=0;
     function tryPlay(){
       if(v.readyState>=3){
@@ -534,7 +535,7 @@ function openModal(i){
       }else{v.addEventListener('canplay',function(){ld.style.display='none';v.play().catch(function(){v.muted=true;v.play()})},{once:true})}
     }
     v.onerror=function(){
-      if(retries<2){retries++;setTimeout(function(){v.src=w.file+'?r='+retries;v.load();tryPlay()},1000)}
+      if(retries<2){retries++;setTimeout(function(){v.src=CDN+'/'+w.file+'?r='+retries;v.load();tryPlay()},1000)}
       else{ld.style.display='none';er.style.display='flex'}
     };
     tryPlay();
