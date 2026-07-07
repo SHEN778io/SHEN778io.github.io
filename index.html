@@ -1,575 +1,257 @@
-<!DOCTYPE html>
-<html lang="zh-CN" class="scroll-smooth">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="format-detection" content="telephone=no">
-<title>申兆文 | AI 视频创作者</title>
-<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>申兆文 · AI 视频作品集 / 2026</title>
+<meta name="description" content="申兆文 ECROLL — AI 视频创作者 · 品牌宣传 / 产品展示 / 口播带货 / 其他视觉内容">
+<meta name="theme-color" content="#0a0a0a">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=Permanent+Marker&family=VT323&display=swap" rel="stylesheet">
-<style>
-*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid}
-:root{--yellow:#FAFF00}
-html{scroll-behavior:smooth;font-family:'Space Grotesk','Segoe UI',sans-serif;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:#0a0a0a;color:#fff;overflow-x:hidden;font-family:'Space Grotesk','Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
-.font-hand{font-family:'Permanent Marker','Comic Sans MS',cursive}
-.font-pixel{font-family:'VT323','Courier New',monospace}
-.font-black{font-weight:900}
-.font-bold{font-weight:700}
-.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-.selection\\:bg-y2k-yellow ::selection,.selection\\:bg-y2k-yellow::selection{background:#FAFF00;color:#000}
-.text-y2k-yellow{color:#FAFF00}
-.text-white{color:#fff}
-.text-gray-400{color:#9ca3af}
-.text-gray-500{color:#6b7280}
-.bg-y2k-black{background:#0a0a0a}
-.border-gray-700{border-color:#374151}
-.border-gray-800{border-color:#1f2937}
-.border-white{border-color:#fff}
-.border-t{border-top-width:1px}
-.border-y{border-top-width:1px;border-bottom-width:1px}
-.border-b{border-bottom-width:1px}
-.border-b-4{border-bottom-width:4px}
-.pointer-events-none{pointer-events:none}
-.pointer-events-auto{pointer-events:auto}
-.uppercase{text-transform:uppercase}
-.tracking-tighter{letter-spacing:-0.05em}
-.tracking-wider{letter-spacing:0.05em}
-.tracking-widest{letter-spacing:0.1em}
-.leading-none{line-height:1}
-.leading-relaxed{line-height:1.625}
-.text-center{text-align:center}
-.noise-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:50;opacity:0.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")}
-.grid-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-size:50px 50px;background-image:linear-gradient(to right,rgba(250,255,0,0.1) 1px,transparent 1px),linear-gradient(to bottom,rgba(250,255,0,0.1) 1px,transparent 1px);animation:moveGrid 20s linear infinite;z:0;mask-image:linear-gradient(to bottom,black 40%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,black 40%,transparent 100%);will-change:transform}
-@keyframes moveGrid{0%{transform:translateY(0) rotate(0deg) scale(1.2)}100%{transform:translateY(50px) rotate(0deg) scale(1.2)}}
-.elastic-in{animation:elastic 1.2s cubic-bezier(0.175,0.885,0.32,1.275) forwards;opacity:0;transform:translateY(50px) scale(0.8)}
-@keyframes elastic{to{opacity:1;transform:translateY(0) scale(1)}}
-.glow-hover{transition:all 0.3s ease;cursor:pointer}
-.glow-hover:hover{transform:scale(0.98);text-shadow:0 0 10px var(--yellow),0 0 20px var(--yellow);color:var(--yellow)}
-.float-anim{animation:floating 6s ease-in-out infinite;will-change:transform}
-@keyframes floating{0%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-15px) rotate(1deg)}100%{transform:translateY(0) rotate(-2deg)}}
-.sticker{transition:transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94);will-change:transform}
-.polaroid-container:hover .sticker{animation:wiggle 0.5s ease-in-out infinite alternate}
-.polaroid-container:hover .sticker:nth-child(even){animation-direction:alternate-reverse;animation-duration:0.6s}
-@keyframes wiggle{0%{transform:rotate(-5deg) scale(1.05)}100%{transform:rotate(5deg) scale(0.95)}}
-.decor-curve{position:absolute;z-index:-1;stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawLine 3s ease forwards 1s}
-@keyframes drawLine{to{stroke-dashoffset:0}}
-.highlight-link{background-color:var(--yellow);color:#000;padding:0 4px;font-weight:bold;cursor:pointer;transition:all 0.2s;display:inline-block}
-.highlight-link:hover{background-color:#fff;transform:translateY(-2px);box-shadow:2px 2px 0 var(--yellow)}
-.typing-cursor::after{content:'|';animation:blink 1s step-end infinite;color:var(--yellow)}
-@keyframes blink{50%{opacity:0}}
-.works-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:32px;padding:0 16px}
-.works-grid .video-card:first-child{grid-column:1/-1}
-.video-card{position:relative;border-radius:0;overflow:hidden;cursor:pointer;background:#111;opacity:0;transform:translateY(40px)}
-.video-card.visible{opacity:1;transform:translateY(0)}
-.video-card .thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a0a0a}
-.video-card .thumb .gradient{width:100%;height:100%;position:absolute;top:0;left:0;opacity:0.3}
-.video-card .thumb .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
-.video-card:hover .play-btn,.video-card:active .play-btn{background:rgba(250,255,0,0.15);border-color:rgba(250,255,0,0.5)}
-.video-card .play-btn::after{content:'';width:0;height:0;border-left:12px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
-.video-card .meta{padding:16px 0}
-.video-card .meta .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.video-card .meta .card-title{font-size:1rem;font-weight:700;color:#fff;line-height:1.3}
-.video-card .meta .card-tag{font-size:0.65rem;color:#666;font-family:'VT323',monospace;letter-spacing:1px;white-space:nowrap}
-.video-card .meta .card-desc{font-size:0.78rem;color:#888;line-height:1.5;margin-top:4px}
-@media(max-width:600px){.works-grid{grid-template-columns:1fr;gap:24px}}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;background:rgba(0,0,0,0.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
-.modal.active{display:flex}
-.modal-content{position:relative;width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border:2px solid var(--yellow);overflow:hidden}
-.modal-content video,.modal-content iframe{width:100%;height:100%;object-fit:contain;background:#000;border:none}
-.modal-close{position:absolute;top:-44px;right:0;background:none;border:2px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);font-size:13px;cursor:pointer;padding:6px 16px;font-family:'VT323',monospace;letter-spacing:2px;transition:all 0.2s}
-.modal-close:hover{color:var(--yellow);border-color:var(--yellow)}
-@media(max-width:900px){.video-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
-@media(max-width:500px){.video-grid{grid-template-columns:1fr;gap:12px}}
-.mx-auto{margin-left:auto;margin-right:auto}
-.relative{position:relative}
-.absolute{position:absolute}
-.fixed{position:fixed}
-.inset-0{top:0;right:0;bottom:0;left:0}
-.z-0{z-index:0}
-.z-10{z-index:10}
-.flex{display:flex}
-.grid{display:grid}
-.hidden{display:none}
-.h-screen{height:100vh}
-.w-full{width:100%}
-.max-w-7xl{max-width:80rem}
-.max-w-lg{max-width:32rem}
-.max-w-4xl{max-width:56rem}
-.flex-col{flex-direction:column}
-.flex-row{flex-direction:row}
-.items-center{align-items:center}
-.items-end{align-items:flex-end}
-.justify-center{justify-content:center}
-.justify-between{justify-content:space-between}
-.gap-2{gap:0.5rem}
-.gap-16{gap:4rem}
-.gap-8{gap:2rem}
-.overflow-hidden{overflow:hidden}
-.px-6{padding-left:1.5rem;padding-right:1.5rem}
-.py-20{padding-top:5rem;padding-bottom:5rem}
-.py-24{padding-top:6rem;padding-bottom:6rem}
-.py-28{padding-top:7rem;padding-bottom:7rem}
-.mb-4{margin-bottom:1rem}
-.mb-6{margin-bottom:1.5rem}
-.mb-12{margin-bottom:3rem}
-.mb-16{margin-bottom:4rem}
-.mt-4{margin-top:1rem}
-.mt-6{margin-top:1.5rem}
-.mt-8{margin-top:2rem}
-.pb-4{padding-bottom:1rem}
-.pb-10{padding-bottom:2.5rem}
-.inline-block{display:inline-block}
-.space-y-3>li+li{margin-top:0.75rem}
-.text-3xl{font-size:1.875rem}
-.text-6xl{font-size:3.75rem}
-.text-xs{font-size:0.75rem}
-.text-sm{font-size:0.875rem}
-.text-lg{font-size:1.125rem}
-.text-xl{font-size:1.25rem}
-.w-12{width:3rem}
-.h-12{height:3rem}
-.w-2{width:0.5rem}
-.h-2{height:0.5rem}
-.rounded-full{border-radius:9999px}
-.transition-all{transition-property:all}
-.transition-colors{transition-property:color,background-color,border-color}
-.duration-300{transition-duration:300ms}
-.group:hover .group-hover\\:text-y2k-yellow{color:#FAFF00}
-.group:hover .group-hover\\:scale-110{transform:scale(1.1)}
-.hover\\:text-white:hover{color:#fff}
-.hover\\:transition-colors:hover{transition-property:color,background-color,border-color}
-.opacity-60{opacity:0.6}
-.animate-pulse{animation:pulse 2s cubic-bezier(0.4,0,0.6,1) infinite}@keyframes pulse{50%{opacity:0.5}}
-.animate-bounce{animation:bounce 1s infinite}@keyframes bounce{0%,100%{transform:translateY(-25%)}50%{transform:translateY(0)}}
-.transform{transform:var(--tw-transform)}
-.-rotate-2{transform:rotate(-2deg)}
-.-translate-x-1\\/2{transform:translateX(-50%)}
-.cursor-pointer{cursor:pointer}
-.min-h-screen{min-height:100vh}
-.p-6{padding:1.5rem}
-.border-2{border-width:2px}
-.border-4{border-width:4px}
-.border-black{border-color:#000}
-.shadow-2xl{box-shadow:0 25px 50px -12px rgba(0,0,0,0.25)}
-.video-card:hover{transform:translateY(-4px)}
-.video-card:hover .play-btn{background:rgba(250,255,0,0.15);border-color:rgba(250,255,0,0.5)}
-@media(min-width:768px){
-.md\\:grid-cols-2{grid-template-columns:repeat(2,1fr)}
-.md\\:grid-cols-3{grid-template-columns:repeat(3,1fr)}
-.md\\:block{display:block}
-.md\\:flex-row{flex-direction:row}
-.md\\:gap-8{gap:2rem}
-.md\\:gap-20{gap:5rem}
-.md\\:px-12{padding-left:3rem;padding-right:3rem}
-.md\\:px-20{padding-left:5rem;padding-right:5rem}
-.md\\:mt-8{margin-top:2rem}
-.md\\:text-2xl{font-size:1.5rem}
-.md\\:text-5xl{font-size:3rem}
-.md\\:text-8xl{font-size:6rem}
-.md\\:text-base{font-size:1rem}
-.md\\:w-16{width:4rem}
-.md\\:h-16{height:4rem}
-.md\\:w-80{width:20rem}
-.md\\:border-r{border-right-width:1px}
-.md\\:border-b-0{border-bottom-width:0}
-.md\\:p-8{padding:2rem}
-}
-@media(min-width:1024px){
-.lg\\:px-20{padding-left:5rem;padding-right:5rem}
-.lg\\:text-\\[10rem\\]{font-size:10rem}
-}
-</style>
-<script>
-tailwind.config={theme:{extend:{colors:{y2k:{black:'#0a0a0a',yellow:'#FAFF00',white:'#FFFFFF',gray:'#222222'}},fontFamily:{sans:['Space Grotesk','sans-serif'],hand:['Permanent Marker','cursive'],pixel:['VT323','monospace']}}}}
-</script>
-<script src="https://cdn.tailwindcss.com" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Caveat:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fa0'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='18' font-weight='700' fill='%230a0a0a' font-family='monospace'%3ES%3C/text%3E%3C/svg%3E">
 </head>
-<body class="antialiased font-sans selection:bg-y2k-yellow selection:text-black">
+<body>
 
-<div class="noise-overlay"></div>
-<div id="toast" style="visibility:hidden;min-width:250px;background-color:var(--yellow);color:#000;text-align:center;border-radius:4px;padding:16px;position:fixed;z-index:100;left:50%;bottom:30px;transform:translateX(-50%);font-family:'Space Grotesk',sans-serif;font-weight:bold;box-shadow:4px 4px 0 #fff;opacity:0;transition:opacity 0.3s,bottom 0.3s"></div>
-
-<!-- ===== HERO ===== -->
-<section id="hero" class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
-  <div class="grid-bg"></div>
-  <div id="hero-3d-container" class="absolute inset-0 z-0 w-full h-full pointer-events-none flex items-center justify-center"></div>
-  <div class="relative z-10 text-center flex flex-col items-center justify-center pointer-events-none">
-    <h1 class="font-black text-6xl md:text-8xl lg:text-[10rem] leading-none tracking-tighter cursor-pointer pointer-events-auto elastic-in glow-hover uppercase" style="animation-delay:0.2s">
-      AI VIDEO<br><span class="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500" style="-webkit-text-stroke:2px white">PORTFOLIO</span>
-    </h1>
-    <h2 class="mt-4 md:mt-8 text-xl md:text-2xl font-bold tracking-[0.3em] md:tracking-[0.5em] text-y2k-yellow elastic-in" style="animation-delay:0.5s">
-      AI 视频创作 · 产品展示
-    </h2>
-    <p class="mt-8 text-sm md:text-base tracking-widest text-gray-400 font-pixel elastic-in" style="animation-delay:0.8s">
-      申兆文
-    </p>
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <span class="dot"></span>
+    <span>SHEN · 2026</span>
+  </a>
+  <div class="nav-links">
+    <a href="#hero" class="nav-link">Home</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#works-brand" class="nav-link">Works</a>
+    <a href="#skills" class="nav-link">Skills</a>
+    <a href="#contact" class="nav-link">Contact</a>
   </div>
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce">
-    <span class="text-xs tracking-widest mb-2 font-pixel text-gray-400">SCROLL</span>
-    <div class="w-px h-12 bg-gradient-to-b from-y2k-yellow to-transparent"></div>
+</nav>
+
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <h1 class="hero-title" data-text-split>
+      <span class="stroke" data-text="AI VIDEO">AI VIDEO</span>
+      <span class="filled" data-text="PORTFOLIO">PORTFOLIO</span>
+    </h1>
+    <div class="hero-sub" data-text-split>
+      <span data-text="A I 视 觉 创 作  ·  产 品 展 示">A I 视 觉 创 作  ·  产 品 展 示</span>
+    </div>
+    <div class="hero-actions" data-text-split>
+      <a href="#works-brand" class="btn btn-primary" data-text="观看作品">
+        <span>观看作品</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn" data-text="联系我">联系我</a>
+    </div>
+    <div class="hero-hint" data-text-split>
+      <span data-text="点击 / 移动鼠标 · 探索 3D 场景">点击 / 移动鼠标 · 探索 3D 场景</span>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="line"></div>
+    <span>SCROLL</span>
   </div>
 </section>
 
-<!-- ===== ABOUT ===== -->
-<section id="about" class="relative w-full min-h-screen flex items-center py-20 px-6 md:px-20 bg-y2k-black border-t border-gray-800">
-  <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 items-center">
-    <div class="relative flex justify-center items-center polaroid-container pt-10">
-      <svg class="decor-curve w-full h-[120%] -left-[10%] top-[-10%]" viewBox="0 0 500 500" fill="none">
-        <path d="M50 50 C 20 200, 450 300, 450 450" stroke="#FAFF00" stroke-width="4" stroke-linecap="round"/>
-        <path d="M10 400 C 100 450, 200 100, 400 20" stroke="#FAFF00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-      </svg>
-      <div class="relative bg-white p-3 pb-12 shadow-2xl float-anim w-64 md:w-80 transform rotate-[-2deg]">
-        <div class="w-full aspect-square bg-y2k-black border-2 border-gray-200 overflow-hidden relative">
-          <div class="w-full h-full bg-[#1a1a1a] flex items-center justify-center relative">
-            <div class="absolute inset-0 opacity-20" style="background-image:url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E')"></div>
-            <svg viewBox="0 0 100 100" class="w-3/4 h-3/4 text-y2k-yellow drop-shadow-[0_0_10px_rgba(250,255,0,0.5)]">
-              <path fill="currentColor" d="M50 10c-11 0-20 9-20 20s9 20 20 20 20-9 20-20-9-20-20-20zm0 45c-16.5 0-50 8.3-50 25v10h100v-10c0-16.7-33.5-25-50-25z"/>
-            </svg>
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="polaroid reveal">
+        <div class="polaroid-photo">
+          <div id="dog-wrap">
+            <canvas id="dog-canvas"></canvas>
           </div>
         </div>
-        <div class="sticker absolute -top-8 -left-8 w-16 h-16 origin-center">
-          <svg viewBox="0 0 100 100" fill="none">
-            <path d="M50 0C50 0 20 30 20 60C20 76.5 33.5 90 50 90C66.5 90 80 76.5 80 60C80 30 50 0 50 0Z" fill="#FAFF00" stroke="#000" stroke-width="4"/>
-            <path d="M50 30C50 30 35 50 35 70C35 78.2 41.8 85 50 85C58.2 85 65 78.2 65 70C65 50 50 30 50 30Z" fill="#fff" stroke="#000" stroke-width="2"/>
-          </svg>
+        <div class="polaroid-stickers">
+          <span class="sticker sticker-1">🔥</span>
+          <span class="sticker sticker-2">🐶</span>
+          <span class="sticker sticker-3">❤️</span>
+          <span class="sticker sticker-4">💛</span>
         </div>
-        <div class="sticker absolute -top-10 -right-6 w-20 h-20 bg-y2k-yellow rounded-full flex items-center justify-center text-4xl border-4 border-black font-hand shadow-[4px_4px_0_0_rgba(0,0,0,1)] z-10" style="transform:rotate(15deg)">🎬</div>
-        <div class="sticker absolute -bottom-6 -right-4 w-12 h-12 origin-center" style="transform:rotate(-15deg)">
-          <svg viewBox="0 0 100 100" fill="none">
-            <path d="M50 90C50 90 10 60 10 30C10 13.4 23.4 0 40 0C49.1 0 50 10 50 10C50 10 50.9 0 60 0C76.6 0 90 13.4 90 30C90 60 50 90 50 90Z" fill="#FAFF00" stroke="#000" stroke-width="6"/>
-          </svg>
+        <div id="dog-bubble">汪!</div>
+        <div class="polaroid-caption">That's me · 2026</div>
+      </div>
+
+      <div class="about-text reveal">
+        <div class="eyebrow">About / 关于我</div>
+        <div class="hi">Hi!</div>
+        <p data-typewriter>
+          我是 <b>申兆文</b>,一名 <b>AI 视频创作者</b>。我专注于用 AI 工具生成高品质影像,
+          涵盖 <span class="hl">产品展示</span>、<span class="hl">创意短片</span>、<span class="hl">带货视频</span>
+          与 <span class="hl">AI 视觉内容</span>。拥有电商经验,更好理解产品卖点,提升销量。
+        </p>
+        <p style="color: var(--text-dim); font-size: 15px;">
+          从脚本到分镜,从拍摄到后期,全流程 AI 化,让创作更高效、表达更自由。
+        </p>
+
+        <div class="about-stats">
+          <div>
+            <div class="stat-num">50<span style="font-size: 24px;">+</span></div>
+            <div class="stat-label">完成项目</div>
+          </div>
+          <div>
+            <div class="stat-num">2026</div>
+            <div class="stat-label">持续创作</div>
+          </div>
+          <div>
+            <div class="stat-num">AI</div>
+            <div class="stat-label">全流程驱动</div>
+          </div>
         </div>
-        <div class="sticker absolute bottom-4 -left-10 w-16 h-16 origin-center" style="transform:rotate(25deg)">
-          <svg viewBox="0 0 100 100" fill="none">
-            <path d="M50 90C50 90 10 60 10 30C10 13.4 23.4 0 40 0C49.1 0 50 10 50 10C50 10 50.9 0 60 0C76.6 0 90 13.4 90 30C90 60 50 90 50 90Z" fill="#FAFF00" stroke="#000" stroke-width="6"/>
-          </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="works-brand" class="works-module">
+  <div class="container">
+    <div class="works-head">
+      <h2 class="works-head-title">My Works <em>· 品牌宣传</em></h2>
+      <div class="works-head-meta">
+        <span>AI 视觉创作</span>
+        <span>PRODUCT</span>
+        <span>2026</span>
+      </div>
+    </div>
+    <div class="works-grid"></div>
+  </div>
+</section>
+
+<section id="works-product" class="works-module">
+  <div class="container">
+    <div class="works-head">
+      <h2 class="works-head-title">My Works <em>· 产品展示</em></h2>
+      <div class="works-head-meta">
+        <span>AI 视觉创作</span>
+        <span>PRODUCT</span>
+        <span>2026</span>
+      </div>
+    </div>
+    <div class="works-grid"></div>
+  </div>
+</section>
+
+<section id="works-livestream" class="works-module">
+  <div class="container">
+    <div class="works-head">
+      <h2 class="works-head-title">My Works <em>· 口播带货</em></h2>
+      <div class="works-head-meta">
+        <span>AI 视觉创作</span>
+        <span>PRODUCT</span>
+        <span>2026</span>
+      </div>
+    </div>
+    <div class="works-grid"></div>
+  </div>
+</section>
+
+<section id="works-other" class="works-module">
+  <div class="container">
+    <div class="works-head">
+      <h2 class="works-head-title">My Works <em>· 其他</em></h2>
+      <div class="works-head-meta">
+        <span>AI 视觉创作</span>
+        <span>PRODUCT</span>
+        <span>2026</span>
+      </div>
+    </div>
+    <div class="works-grid"></div>
+  </div>
+</section>
+
+<section id="skills" class="section">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Skills / 技能栈</div>
+      <h2 class="section-title">用 AI <em>重塑</em> 视觉流程</h2>
+      <p class="section-sub">从脚本到成片,全链路 AI 工具驱动,让创作更高效、表达更自由。</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
         </div>
+        <h4>AI 视频生成</h4>
+        <p>Sora / Runway / 可灵 / 即梦,从文本到画面的端到端创作。</p>
       </div>
-    </div>
-    <div class="flex flex-col justify-center max-w-lg">
-      <h2 class="font-hand text-6xl md:text-8xl mb-6 text-white transform -rotate-2">Hi!</h2>
-      <div id="typewriter-content" class="hidden">
-        我是 <span class="font-hand text-y2k-yellow text-2xl mx-1">申兆文</span>，一名 AI 视频创作者。我专注于用 AI 工具生成高品质影像，涵盖 <span class="highlight-link" onclick="showToast('产品展示视频')">产品展示</span>、<span class="highlight-link" onclick="showToast('创意短片')">创意短片</span>、<span class="highlight-link" onclick="showToast('带货视频')">带货视频</span>与 <span class="highlight-link" onclick="showToast('AI 视觉内容')">AI 视觉内容</span>。拥有电商经验，更好理解产品卖点，提升销量。
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h4>商业脚本</h4>
+        <p>深耕电商场景,直击卖点,带得动货的脚本结构。</p>
       </div>
-      <p id="typewriter-target" class="text-lg md:text-xl leading-relaxed font-bold tracking-wide typing-cursor min-h-[150px]"></p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== WORKS ===== -->
-<section id="works" class="w-full py-28 px-6 md:px-12 lg:px-20 bg-y2k-black border-t border-gray-800">
-  <div class="max-w-7xl mx-auto">
-    <div class="flex justify-between items-end mb-16 border-b border-gray-800 pb-4">
-      <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white">MY WORKS</h2>
-      <span class="text-xs text-gray-500 font-pixel tracking-wider hidden md:block">AI 视频创作 / PRODUCT 影视广告</span>
-    </div>
-    <div class="works-grid" id="gallery"></div>
-  </div>
-</section>
-
-<!-- ===== CONTACT ===== -->
-<section id="contact" class="relative w-full py-24 bg-y2k-black border-y border-gray-800 overflow-hidden flex flex-col items-center justify-center">
-  <canvas id="particleCanvas" class="absolute inset-0 w-full h-full z-0 opacity-60"></canvas>
-  <div class="relative z-10 w-full max-w-4xl mx-auto px-6">
-    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-16 text-center text-white">CONTACT</h2>
-    <div class="flex flex-row justify-center items-center gap-16 md:gap-20 pb-10">
-      <div class="group flex flex-col items-center cursor-pointer" onclick="showToast('电话: 17378145776')">
-        <svg class="w-12 h-12 md:w-16 md:h-16 text-white group-hover:text-y2k-yellow group-hover:scale-110 transition-all duration-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-        </svg>
-        <span class="text-sm md:text-base font-pixel tracking-widest group-hover:text-y2k-yellow transition-colors">173 7814 5776</span>
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+        </div>
+        <h4>分镜 & 后期</h4>
+        <p>剪映/PR + AI 配音/特效,成片节奏紧凑、视觉一致。</p>
       </div>
-      <div class="hidden md:block text-y2k-yellow font-hand text-3xl animate-pulse">★</div>
-      <div class="group flex flex-col items-center cursor-pointer" onclick="showToast('作品合作，欢迎联系')">
-        <svg class="w-12 h-12 md:w-16 md:h-16 text-white group-hover:text-y2k-yellow group-hover:scale-110 transition-all duration-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-        </svg>
-        <span class="text-sm md:text-base font-pixel tracking-widest group-hover:text-y2k-yellow transition-colors">shenzhaowen@email.com</span>
-      </div>
-    </div>
-    <div class="text-center mt-6">
-      <span class="text-xs text-gray-500 font-pixel tracking-[0.2em] uppercase">点击联系 →</span>
-    </div>
-  </div>
-</section>
-
-<!-- ===== SKILLS ===== -->
-<section class="w-full py-20 px-6 md:px-20 bg-y2k-black">
-  <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-12 text-white border-b-4 border-white pb-4 inline-block">TOOLS & SKILLS</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 border border-gray-700">
-      <div class="p-6 md:p-8 border-b md:border-b-0 md:border-r border-gray-700">
-        <h3 class="text-y2k-yellow font-black text-xl mb-6 uppercase tracking-wider">AI 工具</h3>
-        <ul class="space-y-3 font-bold text-gray-300">
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> 即梦 AI</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> 可灵 AI</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> Runway</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> Pika</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> Midjourney</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> Stable Diffusion</li>
-        </ul>
-      </div>
-      <div class="p-6 md:p-8 border-b md:border-b-0 md:border-r border-gray-700">
-        <h3 class="text-y2k-yellow font-black text-xl mb-6 uppercase tracking-wider">后期剪辑</h3>
-        <ul class="space-y-3 font-bold text-gray-300">
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> 剪映专业版</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> Premiere Pro</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> After Effects</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> DaVinci Resolve</li>
-        </ul>
-      </div>
-      <div class="p-6 md:p-8">
-        <h3 class="text-y2k-yellow font-black text-xl mb-6 uppercase tracking-wider">设计技能</h3>
-        <ul class="space-y-3 font-bold text-gray-300">
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> Photoshop</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> Illustrator</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> Figma</li>
-          <li class="flex items-center gap-2 hover:text-white transition-colors"><span class="w-2 h-2 bg-y2k-yellow rounded-full"></span> Canva</li>
-        </ul>
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h4>视觉设计</h4>
+        <p>Midjourney / Stable Diffusion,统一品牌视觉与海报体系。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== MODAL ===== -->
-<div class="modal" id="videoModal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeModal()">✕ CLOSE</button>
-    <div id="loader" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:#000;flex-direction:column;z-index:10">
-      <div style="width:40px;height:40px;border:3px solid rgba(250,255,0,0.2);border-top-color:#FAFF00;border-radius:50%;animation:spin .8s linear infinite"></div>
-      <span style="margin-top:16px;font-family:VT323;font-size:14px;color:#666;letter-spacing:2px">BUFFERING</span>
+<section id="contact" class="section">
+  <div class="container contact-inner">
+    <div class="reveal">
+      <div class="eyebrow" style="justify-content: center;">Contact / 联系</div>
+      <h2 class="contact-title">Let's <em>create</em><br>something together</h2>
+      <p class="contact-sub">有项目想聊?欢迎随时联系,48 小时内回复。</p>
     </div>
-    <div id="playerr" style="display:none;width:100%;height:100%;background:#000">
-      <video id="player" controls playsinline webkit-playsinline x5-playsinline preload="none" style="width:100%;height:100%"></video>
+    <div class="contact-cards">
+      <a href="tel:17378145776" class="contact-card reveal">
+        <div class="contact-label">电话 / Phone</div>
+        <div class="contact-value">17378145776</div>
+      </a>
+      <div class="contact-card reveal">
+        <div class="contact-label">微信 / WeChat</div>
+        <div class="contact-value">SZW041027</div>
+      </div>
+      <a href="mailto:17378145776@163.com" class="contact-card reveal">
+        <div class="contact-label">邮箱 / Email</div>
+        <div class="contact-value">17378145776@163.com</div>
+      </a>
     </div>
-    <div id="verror" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:#000;flex-direction:column;z-index:10">
-      <span style="font-family:VT323;font-size:18px;color:#FAFF00;letter-spacing:2px">PLAYBACK ERROR</span>
-      <span style="margin-top:12px;font-family:VT323;font-size:12px;color:#666;letter-spacing:1px">点击关闭重试</span>
+
+    <div class="footer-bottom">
+      <div>© 2026 申兆文 · SHEN ZHAOWEN</div>
+      <div>AI · MOTION · STORY</div>
+      <div>Made with ❤ + AI</div>
     </div>
-    <iframe id="bplayer" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="display:none"></iframe>
+  </div>
+</section>
+
+<div id="player-modal">
+  <div class="player-box">
+    <div class="player-video-wrap">
+      <button id="player-close" aria-label="关闭">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <video id="player-video" controls playsinline></video>
+    </div>
+    <div class="player-info">
+      <h2 id="player-title"></h2>
+      <div class="meta" id="player-meta"></div>
+      <div class="desc" id="player-desc"></div>
+    </div>
   </div>
 </div>
-<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 
-<script defer>
-// --- Mobile detection ---
-const isMobile=('ontouchstart' in window)||(navigator.maxTouchPoints>0)||(window.innerWidth<768);
-const isLowPerf=isMobile||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<4);
-
-// --- Dynamic Three.js loader ---
-function loadThreeJS(){
-  const s=document.createElement('script');
-  s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-  s.onload=initHero3D;
-  s.onerror=function(){document.getElementById('hero-3d-container').innerHTML='<div style="color:#FAFF00;font-family:VT323;font-size:1rem;text-align:center;padding-top:30vh">3D SCENE<br><span style="color:#666">loading failed</span></div>'};
-  document.body.appendChild(s);
-}
-
-// --- Three.js Hero Scene (mobile-optimized) ---
-function initHero3D(){
-  const container=document.getElementById('hero-3d-container');
-  if(!container)return;
-  const detail=isLowPerf?1:2;
-  const ringSeg=isLowPerf?24:64;
-  const sphereSeg=isLowPerf?16:32;
-  const particleCount=isLowPerf?8:20;
-  const pixelRatio=Math.min(window.devicePixelRatio,isMobile?1.5:2);
-
-  try{
-    const scene=new THREE.Scene();
-    const camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,100);
-    camera.position.z=18;
-    const renderer=new THREE.WebGLRenderer({alpha:true,antialias:!isLowPerf});
-    renderer.setSize(window.innerWidth,window.innerHeight);
-    renderer.setPixelRatio(pixelRatio);
-    container.appendChild(renderer.domElement);
-    const cluster=new THREE.Group();
-    scene.add(cluster);
-    const matYellow=new THREE.MeshPhysicalMaterial({color:0xFAFF00,metalness:0.3,roughness:0.2,clearcoat:isLowPerf?0:0.8});
-    const matDark=new THREE.MeshStandardMaterial({color:0x111111,roughness:0.9});
-    const matChrome=new THREE.MeshPhysicalMaterial({color:0xffffff,metalness:1,roughness:0.1});
-    const matWhite=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.4});
-    const matWireframe=new THREE.MeshBasicMaterial({color:0xFAFF00,wireframe:true});
-    const rockGeo=new THREE.DodecahedronGeometry(2.5,isLowPerf?0:1);
-    const posAttr=rockGeo.attributes.position;
-    for(let i=0;i<posAttr.count;i++){posAttr.setXYZ(i,posAttr.getX(i)+(Math.random()-0.5)*0.4,posAttr.getY(i)+(Math.random()-0.5)*0.4,posAttr.getZ(i)+(Math.random()-0.5)*0.4)}
-    rockGeo.computeVertexNormals();
-    const rock=new THREE.Mesh(rockGeo,matDark);rock.position.set(-3,-2,1);cluster.add(rock);
-    const crossGroup=new THREE.Group();
-    crossGroup.add(new THREE.Mesh(new THREE.BoxGeometry(1,4,1),matYellow));
-    crossGroup.add(new THREE.Mesh(new THREE.BoxGeometry(4,1,1),matYellow));
-    crossGroup.position.set(2,3,-1);crossGroup.rotation.z=Math.PI/4;crossGroup.rotation.x=Math.PI/6;cluster.add(crossGroup);
-    const torus=new THREE.Mesh(new THREE.TorusGeometry(2,0.6,16,ringSeg),matChrome);
-    torus.position.set(-3,3,-2);torus.rotation.x=Math.PI/3;cluster.add(torus);
-    const sphere=new THREE.Mesh(new THREE.SphereGeometry(1.8,sphereSeg,Math.floor(sphereSeg/2)),matWhite);
-    sphere.position.set(4,-1.5,0);cluster.add(sphere);
-    const wireSphere=new THREE.Mesh(new THREE.IcosahedronGeometry(1.5,0),matWireframe);
-    wireSphere.position.set(0,0,3.5);cluster.add(wireSphere);
-    const ring1=new THREE.Mesh(new THREE.TorusGeometry(6.5,0.04,12,ringSeg),matWhite);
-    ring1.rotation.x=Math.PI/2.5;ring1.rotation.y=Math.PI/6;cluster.add(ring1);
-    const ring2=new THREE.Mesh(new THREE.TorusGeometry(7.5,0.02,12,ringSeg),new THREE.MeshBasicMaterial({color:0xFAFF00}));
-    ring2.rotation.x=-Math.PI/3;ring2.rotation.y=-Math.PI/4;cluster.add(ring2);
-    for(let i=0;i<particleCount;i++){
-      const p=new THREE.Mesh(new THREE.SphereGeometry(isLowPerf?0.25:0.2,8,8),Math.random()>0.6?matYellow:matChrome);
-      p.position.set((Math.random()-0.5)*15,(Math.random()-0.5)*15,(Math.random()-0.5)*10);cluster.add(p);
-    }
-    scene.add(new THREE.AmbientLight(0xffffff,0.8));
-    const dl1=new THREE.DirectionalLight(0xffffff,isLowPerf?1.5:2);dl1.position.set(10,10,10);scene.add(dl1);
-    const dl2=new THREE.DirectionalLight(0xFAFF00,isLowPerf?0.5:1);dl2.position.set(-10,-10,-5);scene.add(dl2);
-    let mouseX=0,mouseY=0;const target=new THREE.Vector2();
-
-    function onPointer(x,y){
-      mouseX=(x-window.innerWidth/2)*0.0005;
-      mouseY=(y-window.innerHeight/2)*0.0005;
-    }
-    document.addEventListener('mousemove',e=>onPointer(e.clientX,e.clientY));
-    document.addEventListener('touchmove',e=>{const t=e.touches[0];if(t)onPointer(t.clientX,t.clientY)},{passive:true});
-
-    let resizeTimer;
-    window.addEventListener('resize',()=>{
-      clearTimeout(resizeTimer);
-      resizeTimer=setTimeout(()=>{
-        camera.aspect=window.innerWidth/window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth,window.innerHeight);
-      },200);
-    });
-
-    function animate(){
-      requestAnimationFrame(animate);
-      cluster.rotation.y+=0.001;cluster.rotation.x+=0.0005;
-      target.x=mouseX;target.y=mouseY;
-      cluster.rotation.y+=0.05*(target.x-cluster.rotation.y);
-      cluster.rotation.x+=0.05*(target.y-cluster.rotation.x);
-      rock.rotation.y-=0.002;rock.rotation.z+=0.001;crossGroup.rotation.z+=0.003;
-      wireSphere.rotation.x+=0.005;wireSphere.rotation.y+=0.008;torus.rotation.z+=0.002;
-      ring1.rotation.z-=0.001;ring2.rotation.z+=0.002;
-      renderer.render(scene,camera);
-    }
-    animate();
-  }catch(e){container.innerHTML='<div style="color:#666;font-family:VT323;font-size:0.8rem;text-align:center;padding-top:30vh">3D unavailable</div>'}
-}
-// Load Three.js after first paint
-if(document.readyState==='complete'||document.readyState==='interactive'){setTimeout(loadThreeJS,100)}else{document.addEventListener('DOMContentLoaded',()=>setTimeout(loadThreeJS,100))}
-
-// --- Toast ---
-function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;
-  t.style.visibility='visible';t.style.opacity='1';t.style.bottom='50px';
-  setTimeout(()=>{t.style.opacity='0';t.style.bottom='30px';setTimeout(()=>{t.style.visibility='hidden'},300)},2500);
-}
-
-// --- Typewriter ---
-const contentDiv=document.getElementById('typewriter-content');
-const targetElement=document.getElementById('typewriter-target');
-let hasTyped=false;
-function typeWriter(element,htmlContent,speed=30){
-  targetElement.innerHTML='';targetElement.classList.add('typing-cursor');
-  const tempDiv=document.createElement('div');tempDiv.innerHTML=htmlContent;
-  const nodes=Array.from(tempDiv.childNodes);let ci=0,ti=0;
-  function typeNext(){
-    if(ci<nodes.length){
-      const node=nodes[ci];
-      if(node.nodeType===Node.TEXT_NODE){
-        if(ti<node.textContent.length){targetElement.appendChild(document.createTextNode(node.textContent.charAt(ti)));ti++;setTimeout(typeNext,speed+Math.random()*20)}
-        else{ci++;ti=0;setTimeout(typeNext,speed)}
-      }else if(node.nodeType===Node.ELEMENT_NODE){
-        const clone=node.cloneNode(false);targetElement.appendChild(clone);let et=0;
-        function typeElem(){if(et<node.textContent.length){clone.appendChild(document.createTextNode(node.textContent.charAt(et)));et++;setTimeout(typeElem,speed)}else{ci++;setTimeout(typeNext,speed)}}
-        typeElem();
-      }
-    }else{setTimeout(()=>{targetElement.classList.remove('typing-cursor')},2000)}
-  }
-  typeNext();
-}
-const aboutObs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting&&!hasTyped){setTimeout(()=>{typeWriter(targetElement,contentDiv.innerHTML,40);hasTyped=true},500)}})},{threshold:0.3});
-aboutObs.observe(document.getElementById('about'));
-
-// --- Video Gallery ---
-const CDN='https://cdn.jsdelivr.net/gh/SHEN778io/SHEN778io.github.io@latest';
-const works=[
-  {title:'猫砂盆',tag:'AI 视频创作 / PRODUCT',desc:'智能猫砂盆产品动态视觉，AI 生成沉浸式场景。',file:'videos/猫砂盆.mp4',colors:['#1a0533','#4a1a7a']},
-  {title:'婴儿车',tag:'AI 视频创作 / PRODUCT',desc:'婴儿推车产品展示，生成逼真的户外场景。',file:'videos/婴儿车.mp4',colors:['#0a1a3a','#1a5a8a']},
-  {title:'威士忌1',tag:'AI 视频创作 / PRODUCT',desc:'威士忌产品动态视觉，光影流动的品质感。',file:'videos/威士忌1.mp4',colors:['#1a1a1a','#4a4a2a']},
-  {title:'威士忌2',tag:'AI 视频创作 / PRODUCT',desc:'威士忌产品镜头，微距质感与氛围营造。',file:'videos/威士忌2.mp4',colors:['#0a0a2e','#1a3a6a']},
-  {title:'威士忌3',tag:'AI 视频创作 / PRODUCT',desc:'威士忌品牌视觉，动态特效与产品融合。',file:'videos/威士忌3.mp4',colors:['#2a0a1a','#6a1a3a']},
-  {title:'杀虫剂',tag:'AI 视频创作 / PRODUCT',desc:'杀虫剂产品创意短片，科技感视觉表达。',file:'videos/杀虫剂.mp4',colors:['#1a1a2e','#3a2a5a']},
-  {title:'纸巾',tag:'AI 视频创作 / PRODUCT',desc:'纸巾产品广告，轻盈质感的视觉呈现。',file:'videos/纸巾.mp4',colors:['#1a0a2a','#3a1a6a']},
-  {title:'维生素',tag:'AI 视频创作 / PRODUCT',desc:'维生素产品创意展示，健康与活力的视觉语言。',file:'videos/维生素.mp4',colors:['#0a0a1a','#2a1a5a']},
-  {title:'耳机',tag:'AI 视频创作 / PRODUCT',desc:'耳机产品动态视觉，声波与科技的融合。',file:'videos/耳机.mp4',colors:['#1a0a1a','#5a2a4a']},
-  {title:'饮水机',tag:'AI 视频创作 / PRODUCT',desc:'饮水机产品展示，水流与纯净的视觉表达。',file:'videos/饮水机.mp4',colors:['#0a1a1a','#2a4a4a']},
-  {title:'鼠标',tag:'AI 视频创作 / PRODUCT',desc:'鼠标产品创意短片，精密工艺的动态呈现。',file:'videos/鼠标.mp4',colors:['#1a1a0a','#4a3a1a']},
-];
-const gallery=document.getElementById('gallery');
-works.forEach((w,i)=>{
-  const card=document.createElement('div');card.className='video-card';
-  card.innerHTML=`<div class="thumb"><img class="thumb-img" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0" alt="${w.title}" loading="lazy" decoding="async"><div class="gradient" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]});transition:opacity .4s"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.4rem;font-weight:900;color:rgba(255,255,255,0.85);letter-spacing:3px;text-shadow:0 2px 8px rgba(0,0,0,0.4)">${w.title}</span></div><div class="play-btn"></div></div><div class="meta"><div class="top-row"><span class="card-title">${w.title} AI 动态视觉 ${String(i+1).padStart(2,'0')}</span><span class="card-tag">${w.tag}</span></div><p class="card-desc">${w.desc}</p></div>`;
-  card.addEventListener('click',()=>openModal(i));gallery.appendChild(card);
-  card.addEventListener('mouseenter',()=>{const p=new Image;p.src=`thumbs/${w.file?w.file.replace('videos/','').replace('.mp4',''):'mosapen'}.png`});
-  card.addEventListener('touchstart',()=>{const p=new Image;p.src=`thumbs/${w.file?w.file.replace('videos/','').replace('.mp4',''):'mosapen'}.png`},{passive:true});
-  const thumbImg=card.querySelector('.thumb-img');
-  const thumbName=w.file?w.file.replace('videos/','').replace('.mp4','') : 'mosapen';
-  thumbImg.onload=function(){const g=this.nextElementSibling;if(g)g.style.opacity='0'};
-  thumbImg.src=`thumbs/${thumbName}.png`;
-});
-function openModal(i){
-  const w=works[i],v=document.getElementById('player'),f=document.getElementById('bplayer');
-  const ld=document.getElementById('loader'),er=document.getElementById('verror'),pr=document.getElementById('playerr');
-  pr.style.display='none';f.style.display='none';ld.style.display='none';er.style.display='none';
-  if(w.bv){
-    f.src=`https://player.bilibili.com/player.html?bvid=${w.bv}&autoplay=1&page=1`;f.style.display='block'
-  }else{
-    ld.style.display='flex';pr.style.display='block';
-    v.src=CDN+'/'+w.file;v.load();
-    let retries=0;
-    function tryPlay(){
-      if(v.readyState>=3){
-        ld.style.display='none';v.play().catch(function(){v.muted=true;v.play()});
-      }else if(v.readyState>=2){
-        ld.style.display='none';v.play().catch(function(){v.muted=true;v.play()});
-      }else{v.addEventListener('canplay',function(){ld.style.display='none';v.play().catch(function(){v.muted=true;v.play()})},{once:true})}
-    }
-    v.onerror=function(){
-      if(retries<2){retries++;setTimeout(function(){v.src=CDN+'/'+w.file+'?r='+retries;v.load();tryPlay()},1000)}
-      else{ld.style.display='none';er.style.display='flex'}
-    };
-    tryPlay();
-  }
-  document.getElementById('videoModal').classList.add('active');document.body.style.overflow='hidden';
-}
-function closeModal(){
-  const v=document.getElementById('player'),f=document.getElementById('bplayer');
-  v.pause();v.removeAttribute('src');v.load();f.src='';
-  v.onerror=null;
-  document.getElementById('videoModal').classList.remove('active');document.body.style.overflow='';
-}
-document.getElementById('videoModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-const vObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');vObs.unobserve(e.target)}})},{threshold:0.1});
-document.querySelectorAll('.video-card').forEach((el,i)=>{setTimeout(()=>vObs.observe(el),i*60)});
-
-// --- Canvas Particles (mobile-optimized) ---
-const canvas=document.getElementById('particleCanvas'),ctx=canvas.getContext('2d');
-let particles=[],animId=null;
-const pScale=isMobile?20000:10000;
-function resizeCanvas(){canvas.width=canvas.parentElement.clientWidth;canvas.height=canvas.parentElement.clientHeight;initParticles()}
-class Particle{
-  constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+0.5;this.baseAlpha=Math.random()*0.5+0.1;this.alpha=this.baseAlpha;this.pulseSpeed=Math.random()*0.02+0.005;this.growing=Math.random()>0.5;this.color=Math.random()>0.8?'#FFFFFF':'#FAFF00'}
-  update(){if(this.growing){this.alpha+=this.pulseSpeed;if(this.alpha>=1)this.growing=false}else{this.alpha-=this.pulseSpeed;if(this.alpha<=this.baseAlpha/2)this.growing=true}}
-  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fillStyle=this.color;ctx.globalAlpha=this.alpha;ctx.fill()}
-}
-function initParticles(){particles=[];const n=(canvas.width*canvas.height)/pScale;for(let i=0;i<Math.min(n,60);i++)particles.push(new Particle())}
-function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});ctx.globalAlpha=1;animId=requestAnimationFrame(animateParticles)}
-function stopParticles(){if(animId){cancelAnimationFrame(animId);animId=null}}
-let resizeTimer;
-window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(resizeCanvas,300)});
-resizeCanvas();animateParticles();
-document.addEventListener('visibilitychange',()=>{document.hidden?stopParticles():animateParticles()});
-</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/three.js/0.160.0/three.min.js" defer></script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
